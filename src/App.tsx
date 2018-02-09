@@ -1,10 +1,7 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import './App.css';
+import { Provider } from 'react-redux';
 
-export interface P {
-    // name: string;
-}
+export interface P {}
 
 class App extends React.Component<P, {}> {
     render() {
@@ -22,6 +19,4 @@ const style = {
     },
 };
 
-const mapState = (state: { name: string }) => ({ name: state.name });
-
-connect(mapState)(App);
+export default App;
