@@ -1,22 +1,22 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-export interface P {}
+import store from './store';
 
-class App extends React.Component<P, {}> {
-    render() {
-        return (
-            <div style={style.app}>
-                <p>oi</p>
-            </div>
-        );
-    }
-}
-
-const style = {
-    app: {
-        display: 'flex',
-    },
-};
+const App = () => (
+    <Provider store={store}>
+        <Router>
+            <Switch>
+                <Route exact path="/" component={Root} />
+                <Route path="/:category" component={PostsByCategory} />
+                <Route path="/post/:id" component={PostDetail} />
+                <Route path="/edit/:id" component={EditPost} />
+                <Route path="/add" component={AddPost} />
+                <Route component={NoMatch} />
+            </Switch>
+        </Router>
+    </Provider>
+);
 
 export default App;
