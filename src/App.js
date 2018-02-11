@@ -15,7 +15,7 @@ const App = () => (
         <Router>
             <Switch>
                 <Route exact path="/" component={Root} />
-                <Route path="/:category" component={PostsByCategory} />
+                <Route path="/posts/:category" component={PostsByCategory} />
                 <Route path="/post/:id" component={PostDetail} />
                 <Route path="/edit/:id" component={EditPost} />
                 <Route path="/add" component={AddPost} />
