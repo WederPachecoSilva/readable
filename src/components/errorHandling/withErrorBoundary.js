@@ -22,13 +22,12 @@ const withErrorBoundary = Component => {
         render() {
             if (this.state.hasError) {
                 return <Error />;
-            } else if (!Component) {
+            } else if (!React.isValidElement(<Component />)) {
                 console.log(
                     'A react component is expected as an argument to withErrorBoundary HOC'
                 );
                 return null;
             } else {
-                // @ts-ignore
                 return <Component {...this.props} />;
             }
         }
