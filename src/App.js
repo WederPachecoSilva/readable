@@ -9,18 +9,25 @@ import EditPost from './components/routes/EditPost';
 import AddPost from './components/routes/AddPost';
 import NotFound from './components/routes/NotFound';
 import store from './store';
+import Header from './components/header/Header';
 
 const App = () => (
     <Provider store={store}>
         <Router>
-            <Switch>
-                <Route exact path="/" component={Root} />
-                <Route path="/posts/:category" component={PostsByCategory} />
-                <Route path="/post/:id" component={PostDetail} />
-                <Route path="/edit/:id" component={EditPost} />
-                <Route path="/add" component={AddPost} />
-                <Route component={NotFound} />
-            </Switch>
+            <React.Fragment>
+                <Header />
+                <Switch>
+                    <Route exact path="/" component={Root} />
+                    <Route
+                        path="/posts/:category"
+                        component={PostsByCategory}
+                    />
+                    <Route path="/post/:id" component={PostDetail} />
+                    <Route path="/edit/:id" component={EditPost} />
+                    <Route path="/add" component={AddPost} />
+                    <Route component={NotFound} />
+                </Switch>
+            </React.Fragment>
         </Router>
     </Provider>
 );
