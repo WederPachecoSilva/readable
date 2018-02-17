@@ -6,11 +6,11 @@ const BASE_URL = 'http://localhost:3001';
  * @returns {Promise}
  */
 async function getCategories() {
-  const categories = await fetch(BASE_URL + '/categories', {
-    headers: { Authorization: 'readable-app' },
-    method: 'GET',
-  }).then(res => res.json());
-  return categories;
+    const categories = await fetch(BASE_URL + '/categories', {
+        headers: { Authorization: 'readable-app' },
+        method: 'GET',
+    }).then(res => res.json());
+    return categories;
 }
 
 /**
@@ -19,12 +19,12 @@ async function getCategories() {
  * @returns {Promise}
  */
 function getPostsByCategory(category) {
-  return fetch(BASE_URL + '/' + category + '/posts', {
-    headers: {
-      Authorization: 'readable-app',
-    },
-    method: 'GET',
-  }).then(res => res.json());
+    return fetch(BASE_URL + '/' + category + '/posts', {
+        headers: {
+            Authorization: 'readable-app',
+        },
+        method: 'GET',
+    }).then(res => res.json());
 }
 
 /**
@@ -32,10 +32,10 @@ function getPostsByCategory(category) {
  * @returns {Promise}
  */
 function getPosts() {
-  return fetch(BASE_URL + '/posts', {
-    headers: { Authorization: 'readable-app' },
-    method: 'GET',
-  }).then(res => res.json());
+    return fetch(BASE_URL + '/posts', {
+        headers: { Authorization: 'readable-app' },
+        method: 'GET',
+    }).then(res => res.json());
 }
 
 /**
@@ -61,10 +61,10 @@ function addPost(post) {
  * @returns {Promise}
  */
 function getPost(id) {
-  return fetch(BASE_URL + '/posts/' + id, {
-    headers: { Authorization: 'readable-app' },
-    method: 'GET',
-  }).then(res => res.json());
+    return fetch(BASE_URL + '/posts/' + id, {
+        headers: { Authorization: 'readable-app' },
+        method: 'GET',
+    }).then(res => res.json());
 }
 
 /**
@@ -74,14 +74,14 @@ function getPost(id) {
  * @returns {Promise}
  */
 function votePost(id, vote) {
-  return fetch(BASE_URL + '/posts' + id, {
-    headers: {
-      Authorization: 'readable-app',
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify(vote),
-  }).then(res => res.json());
+    return fetch(BASE_URL + '/posts/' + id, {
+        headers: {
+            Authorization: 'readable-app',
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(vote),
+    }).then(res => res.json());
 }
 
 /**
@@ -91,14 +91,14 @@ function votePost(id, vote) {
  * @returns {Promise}
  */
 function updatePost(id, postUpdate) {
-  return fetch(BASE_URL + '/posts/' + id, {
-    headers: {
-      Authorization: 'readable-app',
-      'Content-Type': 'application/json',
-    },
-    method: 'put',
-    body: JSON.stringify(postUpdate),
-  }).then(res => res.json());
+    return fetch(BASE_URL + '/posts/' + id, {
+        headers: {
+            Authorization: 'readable-app',
+            'Content-Type': 'application/json',
+        },
+        method: 'put',
+        body: JSON.stringify(postUpdate),
+    }).then(res => res.json());
 }
 
 /**
@@ -108,10 +108,10 @@ function updatePost(id, postUpdate) {
  * @returns {Promise}
  */
 function deletePost(id) {
-  return fetch(BASE_URL + '/posts' + id, {
-    headers: { Authorization: 'readable-app' },
-    method: 'DELETE',
-  }).then(res => res.json());
+    return fetch(BASE_URL + '/posts' + id, {
+        headers: { Authorization: 'readable-app' },
+        method: 'DELETE',
+    }).then(res => res.json());
 }
 
 /**
@@ -120,10 +120,10 @@ function deletePost(id) {
  * @returns {Promise}
  */
 function getCommentsByPost(postId) {
-  return fetch(BASE_URL + '/posts' + postId + '/comments', {
-    headers: { Authorization: 'readable-app' },
-    method: 'GET',
-  }).then(res => res.json());
+    return fetch(BASE_URL + '/posts' + postId + '/comments', {
+        headers: { Authorization: 'readable-app' },
+        method: 'GET',
+    }).then(res => res.json());
 }
 
 /**
@@ -133,14 +133,14 @@ function getCommentsByPost(postId) {
  * @returns {Promise}
  */
 function addComment(id, comment) {
-  return fetch(BASE_URL + '/comments', {
-    headers: {
-      Authorization: 'readable-app',
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify(comment),
-  }).then(res => res.json());
+    return fetch(BASE_URL + '/comments', {
+        headers: {
+            Authorization: 'readable-app',
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(comment),
+    }).then(res => res.json());
 }
 
 /**
@@ -149,10 +149,10 @@ function addComment(id, comment) {
  * @returns {Promise}
  */
 function getComment(id) {
-  return fetch(BASE_URL + '/comments/' + id, {
-    headers: { Authorization: 'readable-app' },
-    method: 'GET',
-  }).then(res => res.json());
+    return fetch(BASE_URL + '/comments/' + id, {
+        headers: { Authorization: 'readable-app' },
+        method: 'GET',
+    }).then(res => res.json());
 }
 
 /**
@@ -162,14 +162,14 @@ function getComment(id) {
  * @returns {Promise}
  */
 function voteComment(id, vote) {
-  return fetch(BASE_URL + '/comments/' + id, {
-    headers: {
-      Authorization: 'readable-app',
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify(vote),
-  }).then(res => res.json());
+    return fetch(BASE_URL + '/comments/' + id, {
+        headers: {
+            Authorization: 'readable-app',
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(vote),
+    }).then(res => res.json());
 }
 
 /**
@@ -179,14 +179,14 @@ function voteComment(id, vote) {
  * @returns {Promise}
  */
 function updateComment(id, commentUpdate) {
-  return fetch(BASE_URL + '/comments/' + id, {
-    headers: {
-      Authorization: 'readable-app',
-      'Content-Type': 'application/json',
-    },
-    method: 'PUT',
-    body: JSON.stringify(commentUpdate),
-  }).then(res => res.json());
+    return fetch(BASE_URL + '/comments/' + id, {
+        headers: {
+            Authorization: 'readable-app',
+            'Content-Type': 'application/json',
+        },
+        method: 'PUT',
+        body: JSON.stringify(commentUpdate),
+    }).then(res => res.json());
 }
 
 /**
@@ -195,25 +195,25 @@ function updateComment(id, commentUpdate) {
  * @returns {Promise}
  */
 function deleteComment(id) {
-  return fetch(BASE_URL + '/comments/' + id, {
-    headers: { Authorization: 'readable-app' },
-    method: 'DELETE',
-  }).then(res => res.json());
+    return fetch(BASE_URL + '/comments/' + id, {
+        headers: { Authorization: 'readable-app' },
+        method: 'DELETE',
+    }).then(res => res.json());
 }
 
 export {
-  getCategories,
-  getPostsByCategory,
-  getPosts,
-  addPost,
-  getPost,
-  votePost,
-  updatePost,
-  deletePost,
-  getCommentsByPost,
-  getComment,
-  addComment,
-  voteComment,
-  updateComment,
-  deleteComment,
+    getCategories,
+    getPostsByCategory,
+    getPosts,
+    addPost,
+    getPost,
+    votePost,
+    updatePost,
+    deletePost,
+    getCommentsByPost,
+    getComment,
+    addComment,
+    voteComment,
+    updateComment,
+    deleteComment,
 };

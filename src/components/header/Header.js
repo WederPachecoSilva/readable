@@ -24,7 +24,6 @@ class Header extends React.Component {
 
     render() {
         const { pathname } = this.props.location;
-        console.log(pathname);
         return (
             // @ts-ignore
             <Navbar light expand="md" style={styles.container}>
