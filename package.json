@@ -5,6 +5,7 @@
     "dependencies": {
         "bootstrap": "^4.0.0",
         "flow-bin": "^0.66.0",
+        "lodash": "^4.17.5",
         "node-fetch": "^2.0.0",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
