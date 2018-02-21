@@ -1,7 +1,6 @@
-import types from './types';
+import { FETCHING, FETCH_CATEGORIES, FAILURE } from './types';
 import * as API from '../utils/readableAPI';
 
-const { FETCHING, FETCH_CATEGORIES, FAILURE } = types;
 export const fetchCategories = () => {
   return async dispatch => {
     dispatch({ type: FETCHING });
