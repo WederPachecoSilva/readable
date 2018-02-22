@@ -37,7 +37,7 @@ function getPosts() {
   }).then(res => res.json());
 }
 
-interface Post {
+export interface Post {
   id: string;
   timestamp: number;
   title: string;
@@ -72,7 +72,7 @@ function getPost(id: string) {
 /**
  * Used for voting on a post
  */
-function votePost(id: string, vote: 'upvote' | 'downvote') {
+function votePost(id: string, vote: 'upVote' | 'downVote') {
   return fetch(BASE_URL + '/posts/' + id, {
     headers: {
       Authorization: 'readable-app',
@@ -118,7 +118,7 @@ function getCommentsByPost(postId: string) {
   }).then(res => res.json());
 }
 
-interface Comment {
+export interface Comment {
   id: string;
   timestamp: number;
   body: string;
