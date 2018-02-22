@@ -13,7 +13,6 @@ export function fetchCommentsByPost(postId: string) {
     try {
       dispatch({ type: FETCH_COMMENTS_BY_POST });
       const response = await getCommentsByPost(postId);
-      response;
       dispatch({
         type: FETCH_COMMENTS_BY_POST_SUCCESS,
         payload: response,
