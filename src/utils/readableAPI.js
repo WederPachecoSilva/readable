@@ -1,219 +1,209 @@
+// @flow
+
 import fetch from 'node-fetch';
-const BASE_URL = 'http://localhost:3001';
+
+import { BASE_URL } from '../../config';
 
 /**
  * Get all post categories available
- * @returns {Promise}
  */
 async function getCategories() {
-    const categories = await fetch(BASE_URL + '/categories', {
-        headers: { Authorization: 'readable-app' },
-        method: 'GET',
-    }).then(res => res.json());
-    return categories;
+  const categories = await fetch(BASE_URL + '/categories', {
+    headers: { Authorization: 'readable-app' },
+    method: 'GET',
+  }).then(res => res.json());
+  return categories;
 }
 
 /**
  * Get all of the posts for a particular category
- * @param {string} category
- * @returns {Promise}
  */
-function getPostsByCategory(category) {
-    return fetch(BASE_URL + '/' + category + '/posts', {
-        headers: {
-            Authorization: 'readable-app',
-        },
-        method: 'GET',
-    }).then(res => res.json());
+function getPostsByCategory(category: string) {
+  return fetch(BASE_URL + '/' + category + '/posts', {
+    headers: {
+      Authorization: 'readable-app',
+    },
+    method: 'GET',
+  }).then(res => res.json());
 }
 
 /**
  * Get all of the posts
- * @returns {Promise}
  */
 function getPosts() {
-    return fetch(BASE_URL + '/posts', {
-        headers: { Authorization: 'readable-app' },
-        method: 'GET',
-    }).then(res => res.json());
+  return fetch(BASE_URL + '/posts', {
+    headers: { Authorization: 'readable-app' },
+    method: 'GET',
+  }).then(res => res.json());
 }
 
+export interface Post {
+  id: string;
+  timestamp: number;
+  title: string;
+  body: string;
+  author: string;
+  category: string;
+}
 /**
  * Add a new port
- * @param {{id: string, timestamp: number, title: string, body: string, author: string, category: string}} post
- * @returns {Promise}
  */
-// prettier-ignore
-function addPost(post) {
-    return fetch(BASE_URL + '/posts', {
-        headers: { 
-            'Authorization': 'readable-app',
-            'Content-Type': 'application/json' 
-        },
-        method: 'post',
-        body: JSON.stringify(post)
-    }).then(res => res.json());
+function addPost(post: Post) {
+  return fetch(BASE_URL + '/posts', {
+    headers: {
+      Authorization: 'readable-app',
+      'Content-Type': 'application/json',
+    },
+    method: 'post',
+    body: JSON.stringify(post),
+  }).then(res => res.json());
 }
 
 /**
  * Get the details of a single post
- * @param {string} id
- * @returns {Promise}
  */
-function getPost(id) {
-    return fetch(BASE_URL + '/posts/' + id, {
-        headers: { Authorization: 'readable-app' },
-        method: 'GET',
-    }).then(res => res.json());
+function getPost(id: string) {
+  return fetch(BASE_URL + '/posts/' + id, {
+    headers: { Authorization: 'readable-app' },
+    method: 'GET',
+  }).then(res => res.json());
 }
 
 /**
  * Used for voting on a post
- * @param {string} id
- * @param {"upvote" | "downvote"} vote
- * @returns {Promise}
  */
-function votePost(id, vote) {
-    return fetch(BASE_URL + '/posts/' + id, {
-        headers: {
-            Authorization: 'readable-app',
-            'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify(vote),
-    }).then(res => res.json());
+function votePost(id: string, vote: 'upVote' | 'downVote') {
+  return fetch(BASE_URL + '/posts/' + id, {
+    headers: {
+      Authorization: 'readable-app',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(vote),
+  }).then(res => res.json());
 }
 
 /**
  * Edit the details of an existing post
- * @param {string} id
- * @param {{title: string, body: string}} postUpdate
- * @returns {Promise}
  */
-function updatePost(id, postUpdate) {
-    return fetch(BASE_URL + '/posts/' + id, {
-        headers: {
-            Authorization: 'readable-app',
-            'Content-Type': 'application/json',
-        },
-        method: 'put',
-        body: JSON.stringify(postUpdate),
-    }).then(res => res.json());
+function updatePost(id: string, postUpdate: { title: string, body: string }) {
+  return fetch(BASE_URL + '/posts/' + id, {
+    headers: {
+      Authorization: 'readable-app',
+      'Content-Type': 'application/json',
+    },
+    method: 'put',
+    body: JSON.stringify(postUpdate),
+  }).then(res => res.json());
 }
 
 /**
  * Sets the deleted flag for a post to 'true'.
  * Sets the parentDeleted flag for all child comments to 'true'
- * @param {string} id
- * @returns {Promise}
  */
-function deletePost(id) {
-    return fetch(BASE_URL + '/posts' + id, {
-        headers: { Authorization: 'readable-app' },
-        method: 'DELETE',
-    }).then(res => res.json());
+function deletePost(id: string) {
+  return fetch(BASE_URL + '/posts' + id, {
+    headers: { Authorization: 'readable-app' },
+    method: 'DELETE',
+  }).then(res => res.json());
 }
 
 /**
  * Get all the comments for a single post.
- * @param {string} postId
- * @returns {Promise}
  */
-function getCommentsByPost(postId) {
-    return fetch(BASE_URL + '/posts' + postId + '/comments', {
-        headers: { Authorization: 'readable-app' },
-        method: 'GET',
-    }).then(res => res.json());
+function getCommentsByPost(postId: string) {
+  return fetch(BASE_URL + '/posts' + postId + '/comments', {
+    headers: { Authorization: 'readable-app' },
+    method: 'GET',
+  }).then(res => res.json());
+}
+
+export interface Comment {
+  id: string;
+  timestamp: number;
+  body: string;
+  author: string;
+  postId: string;
 }
 
 /**
  * Add a comment to a post
- * @param {string} id
- * @param {{id: string, timestamp: Date, body: string, author: string, postId: string}} comment
- * @returns {Promise}
  */
-function addComment(id, comment) {
-    return fetch(BASE_URL + '/comments', {
-        headers: {
-            Authorization: 'readable-app',
-            'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify(comment),
-    }).then(res => res.json());
+function addComment(id: string, comment: Comment) {
+  return fetch(BASE_URL + '/comments', {
+    headers: {
+      Authorization: 'readable-app',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(comment),
+  }).then(res => res.json());
 }
 
 /**
  * Get the details for a single comment
- * @param {string} id
- * @returns {Promise}
  */
-function getComment(id) {
-    return fetch(BASE_URL + '/comments/' + id, {
-        headers: { Authorization: 'readable-app' },
-        method: 'GET',
-    }).then(res => res.json());
+function getComment(id: string) {
+  return fetch(BASE_URL + '/comments/' + id, {
+    headers: { Authorization: 'readable-app' },
+    method: 'GET',
+  }).then(res => res.json());
 }
 
 /**
  * Add a comment to a post
- * @param {string} id
- * @param {"downVote" | "upVote"} vote
- * @returns {Promise}
  */
-function voteComment(id, vote) {
-    return fetch(BASE_URL + '/comments/' + id, {
-        headers: {
-            Authorization: 'readable-app',
-            'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify(vote),
-    }).then(res => res.json());
+function voteComment(id: string, vote: 'downVote' | 'upVote') {
+  return fetch(BASE_URL + '/comments/' + id, {
+    headers: {
+      Authorization: 'readable-app',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(vote),
+  }).then(res => res.json());
 }
 
 /**
  * Add a comment to a post
- * @param {string} id
- * @param {{timestamp: string, body: string}} commentUpdate
- * @returns {Promise}
  */
-function updateComment(id, commentUpdate) {
-    return fetch(BASE_URL + '/comments/' + id, {
-        headers: {
-            Authorization: 'readable-app',
-            'Content-Type': 'application/json',
-        },
-        method: 'PUT',
-        body: JSON.stringify(commentUpdate),
-    }).then(res => res.json());
+function updateComment(
+  id: string,
+  commentUpdate: { timestamp: number, body: string }
+) {
+  return fetch(BASE_URL + '/comments/' + id, {
+    headers: {
+      Authorization: 'readable-app',
+      'Content-Type': 'application/json',
+    },
+    method: 'PUT',
+    body: JSON.stringify(commentUpdate),
+  }).then(res => res.json());
 }
 
 /**
  * Sets a comment's deleted flag to true
- * @param {string} id
- * @returns {Promise}
  */
-function deleteComment(id) {
-    return fetch(BASE_URL + '/comments/' + id, {
-        headers: { Authorization: 'readable-app' },
-        method: 'DELETE',
-    }).then(res => res.json());
+function deleteComment(id: string) {
+  return fetch(BASE_URL + '/comments/' + id, {
+    headers: { Authorization: 'readable-app' },
+    method: 'DELETE',
+  }).then(res => res.json());
 }
 
 export {
-    getCategories,
-    getPostsByCategory,
-    getPosts,
-    addPost,
-    getPost,
-    votePost,
-    updatePost,
-    deletePost,
-    getCommentsByPost,
-    getComment,
-    addComment,
-    voteComment,
-    updateComment,
-    deleteComment,
+  getCategories,
+  getPostsByCategory,
+  getPosts,
+  addPost,
+  getPost,
+  votePost,
+  updatePost,
+  deletePost,
+  getCommentsByPost,
+  getComment,
+  addComment,
+  voteComment,
+  updateComment,
+  deleteComment,
 };
