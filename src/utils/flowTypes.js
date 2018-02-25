@@ -1,5 +1,10 @@
 // @flow
 
+export interface Category {
+  name: string;
+  path: string;
+}
+
 export interface Post {
   id: string;
   timestamp: number;
@@ -12,19 +17,6 @@ export interface Post {
   commentCount: number;
 }
 
-export interface Posts {
-  [id: string]: Post;
-}
-
-export interface Category {
-  name: string;
-  path: string;
-}
-
-export interface Categories {
-  [index: number]: Categories;
-}
-
 export interface Comment {
   id: string;
   parentId: string;
@@ -34,6 +26,14 @@ export interface Comment {
   voteScore: number;
   deleted: boolean;
   parentDeleted: number;
+}
+
+export interface Posts {
+  [id: string]: Post;
+}
+
+export interface Categories {
+  [index: number]: Category;
 }
 
 export interface Comments {
