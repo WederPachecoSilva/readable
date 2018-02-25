@@ -27,14 +27,13 @@ export interface Categories {
 
 export interface Comment {
   id: string;
+  parentId: string;
   timestamp: number;
-  title: string;
   body: string;
   author: string;
-  category: string;
   voteScore: number;
   deleted: boolean;
-  commentCount: number;
+  parentDeleted: number;
 }
 
 export interface Comments {
