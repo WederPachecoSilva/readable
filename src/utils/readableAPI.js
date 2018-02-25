@@ -2,12 +2,20 @@
 
 import fetch from 'node-fetch';
 
+import type {
+  Comment,
+  Comments,
+  Post,
+  Posts,
+  Categories,
+  Category,
+} from './flowTypes';
 import { BASE_URL } from '../../config';
 
 /**
  * Get all post categories available
  */
-async function getCategories() {
+async function getCategories(): Promise<Categories> {
   const categories = await fetch(BASE_URL + '/categories', {
     headers: { Authorization: 'readable-app' },
     method: 'GET',
@@ -18,7 +26,7 @@ async function getCategories() {
 /**
  * Get all of the posts for a particular category
  */
-function getPostsByCategory(category: string) {
+function getPostsByCategory(category: string): Promise<Posts> {
   return fetch(BASE_URL + '/' + category + '/posts', {
     headers: {
       Authorization: 'readable-app',
@@ -30,25 +38,17 @@ function getPostsByCategory(category: string) {
 /**
  * Get all of the posts
  */
-function getPosts() {
+function getPosts(): Promise<Posts> {
   return fetch(BASE_URL + '/posts', {
     headers: { Authorization: 'readable-app' },
     method: 'GET',
   }).then(res => res.json());
 }
 
-export interface Post {
-  id: string;
-  timestamp: number;
-  title: string;
-  body: string;
-  author: string;
-  category: string;
-}
 /**
  * Add a new port
  */
-function addPost(post: Post) {
+function addPost(post: Post): Promise<Post> {
   return fetch(BASE_URL + '/posts', {
     headers: {
       Authorization: 'readable-app',
@@ -62,7 +62,7 @@ function addPost(post: Post) {
 /**
  * Get the details of a single post
  */
-function getPost(id: string) {
+function getPost(id: string): Promise<Post> {
   return fetch(BASE_URL + '/posts/' + id, {
     headers: { Authorization: 'readable-app' },
     method: 'GET',
@@ -72,7 +72,7 @@ function getPost(id: string) {
 /**
  * Used for voting on a post
  */
-function votePost(id: string, vote: 'upVote' | 'downVote') {
+function votePost(id: string, vote: 'upVote' | 'downVote'): Promise<Post> {
   return fetch(BASE_URL + '/posts/' + id, {
     headers: {
       Authorization: 'readable-app',
@@ -86,7 +86,10 @@ function votePost(id: string, vote: 'upVote' | 'downVote') {
 /**
  * Edit the details of an existing post
  */
-function updatePost(id: string, postUpdate: { title: string, body: string }) {
+function updatePost(
+  id: string,
+  postUpdate: { title: string, body: string }
+): Promise<Post> {
   return fetch(BASE_URL + '/posts/' + id, {
     headers: {
       Authorization: 'readable-app',
@@ -101,7 +104,7 @@ function updatePost(id: string, postUpdate: { title: string, body: string }) {
  * Sets the deleted flag for a post to 'true'.
  * Sets the parentDeleted flag for all child comments to 'true'
  */
-function deletePost(id: string) {
+function deletePost(id: string): Promise<Post> {
   return fetch(BASE_URL + '/posts' + id, {
     headers: { Authorization: 'readable-app' },
     method: 'DELETE',
@@ -111,25 +114,17 @@ function deletePost(id: string) {
 /**
  * Get all the comments for a single post.
  */
-function getCommentsByPost(postId: string) {
+function getCommentsByPost(postId: string): Promise<Comments> {
   return fetch(BASE_URL + '/posts' + postId + '/comments', {
     headers: { Authorization: 'readable-app' },
     method: 'GET',
   }).then(res => res.json());
 }
 
-export interface Comment {
-  id: string;
-  timestamp: number;
-  body: string;
-  author: string;
-  postId: string;
-}
-
 /**
  * Add a comment to a post
  */
-function addComment(id: string, comment: Comment) {
+function addComment(id: string, comment: Comment): Promise<Comment> {
   return fetch(BASE_URL + '/comments', {
     headers: {
       Authorization: 'readable-app',
@@ -143,7 +138,7 @@ function addComment(id: string, comment: Comment) {
 /**
  * Get the details for a single comment
  */
-function getComment(id: string) {
+function getComment(id: string): Promise<Comment> {
   return fetch(BASE_URL + '/comments/' + id, {
     headers: { Authorization: 'readable-app' },
     method: 'GET',
@@ -153,7 +148,10 @@ function getComment(id: string) {
 /**
  * Add a comment to a post
  */
-function voteComment(id: string, vote: 'downVote' | 'upVote') {
+function voteComment(
+  id: string,
+  vote: 'downVote' | 'upVote'
+): Promise<Comment> {
   return fetch(BASE_URL + '/comments/' + id, {
     headers: {
       Authorization: 'readable-app',
@@ -170,7 +168,7 @@ function voteComment(id: string, vote: 'downVote' | 'upVote') {
 function updateComment(
   id: string,
   commentUpdate: { timestamp: number, body: string }
-) {
+): Promise<Comment> {
   return fetch(BASE_URL + '/comments/' + id, {
     headers: {
       Authorization: 'readable-app',
@@ -184,7 +182,7 @@ function updateComment(
 /**
  * Sets a comment's deleted flag to true
  */
-function deleteComment(id: string) {
+function deleteComment(id: string): Promise<Comment> {
   return fetch(BASE_URL + '/comments/' + id, {
     headers: { Authorization: 'readable-app' },
     method: 'DELETE',
