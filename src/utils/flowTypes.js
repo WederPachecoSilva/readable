@@ -25,7 +25,7 @@ export interface Comment {
   author: string;
   voteScore: number;
   deleted: boolean;
-  parentDeleted: number;
+  parentDeleted: boolean;
 }
 
 export interface Posts {
