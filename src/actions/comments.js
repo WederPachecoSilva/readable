@@ -68,7 +68,7 @@ export function addComment(id: string, comment: Comment) {
     try {
       dispatch({ type: ADD_COMMENT });
       const response = API.addComment(id, comment);
-      dispatch({ type: ADD_COMMENT_SUCCESS, paylaod: response });
+      dispatch({ type: ADD_COMMENT_SUCCESS, payload: response });
     } catch (error) {
       dispatch({ type: ADD_COMMENT_FAILURE, payload: error });
     }
@@ -80,7 +80,7 @@ export function voteComment(id: string, vote: 'upVote' | 'downVote') {
     try {
       dispatch({ type: VOTE_COMMENT });
       const response = API.voteComment(id, vote);
-      dispatch({ type: VOTE_COMMENT_SUCCESS, paylaod: response });
+      dispatch({ type: VOTE_COMMENT_SUCCESS, payload: response });
     } catch (error) {
       dispatch({ type: VOTE_COMMENT_FAILURE, payload: error });
     }
@@ -95,7 +95,7 @@ export function updateComment(
     try {
       dispatch({ type: UPDATE_COMMENT });
       const response = API.updateComment(id, commentUpdate);
-      dispatch({ type: UPDATE_COMMENT_SUCCESS, paylaod: response });
+      dispatch({ type: UPDATE_COMMENT_SUCCESS, payload: response });
     } catch (error) {
       dispatch({ type: UPDATE_COMMENT_FALURE, payload: error });
     }
@@ -107,7 +107,7 @@ export function deleteComment(id: string) {
     try {
       dispatch({ type: DELETE_COMMENT });
       const response = API.deleteComment(id);
-      dispatch({ type: DELETE_COMMENT_SUCCESS, paylaod: response });
+      dispatch({ type: DELETE_COMMENT_SUCCESS, payload: response });
     } catch (error) {
       dispatch({ type: DELETE_COMMENT_FAILURE, payload: error });
     }
