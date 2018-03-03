@@ -1,5 +1,11 @@
-const index = (state = {}, action) => {
-    return { teste: 'eu ' };
-};
+// @flow
+
+import { combineReducers } from 'redux';
+
+import categories from './categories';
+import posts from './posts';
+import comments from './comments';
+
+const index = combineReducers({ categories, posts, comments });
 
 export default index;
