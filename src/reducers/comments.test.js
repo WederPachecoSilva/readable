@@ -267,4 +267,9 @@ describe('Comments reducer', () => {
     const action = { type: DELETE_COMMENT_SUCCESS, payload };
     expect(comments(defaultState, action)).toEqual(expectation);
   });
+
+  it('Should return default state', () => {
+    const action = { type: 'NON_EXISTING_ACTION' };
+    expect(comments(defaultState, action)).toEqual(defaultState);
+  });
 });

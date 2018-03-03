@@ -1,3 +1,5 @@
+// @flow
+
 import type { Action } from 'redux';
 
 import {
