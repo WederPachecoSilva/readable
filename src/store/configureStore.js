@@ -11,7 +11,10 @@ const cachedState = loadState();
 
 const store = createStore(index, cachedState, applyMiddleware(ReduxThunk));
 
-// Needs to change later to be called only when the desired cache state updates
-store.subscribe(throttle(() => saveState(store.getState()), 1000));
+// Ignores UI and failure state
+const { posts, comments, categories } = store.getState();
+store.subscribe(
+  throttle(() => saveState({ posts, comments, categories }, 1000))
+);
 
 export default store;
