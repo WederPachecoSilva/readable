@@ -14,10 +14,15 @@
         "reactstrap": "^5.0.0-beta",
         "redux": "^3.7.2",
         "redux-thunk": "^2.2.0",
-        "styled-components": "^3.1.6"
+        "styled-components": "^3.1.6",
+        "body-parser": "^1.17.1",
+        "clone": "^2.1.1",
+        "cors": "^2.8.3",
+        "dotenv": "^4.0.0",
+        "express": "^4.15.2"
     },
     "scripts": {
-        "start": "react-scripts start",
+        "start": "concurrently \"react-scripts start\" \"node ./api-server/server\" --kill-others",
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject"
@@ -33,6 +38,7 @@
         "@types/reactstrap": "^5.0.12",
         "@types/redux": "^3.6.0",
         "@types/redux-thunk": "^2.1.0",
+        "concurrently": "^3.5.1",
         "fetch-mock": "^6.0.0",
         "flow-bin": "^0.66.0",
         "node-fetch": "^2.0.0",
