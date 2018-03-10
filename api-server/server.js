@@ -135,7 +135,6 @@ app.get('/', (req, res) => {
 
 app.use((req, res, next) => {
   const token = req.get('Authorization');
-
   if (token) {
     req.token = token;
     next();
@@ -159,7 +158,7 @@ app.get('/categories', (req, res) => {
   );
 });
 
-app.post('/categories/:id', (req, res) => {
+app.post('/categories/', (req, res) => {
   categories.add(req.token, req.params.id).then(
     data => res.send(data),
     error => {
