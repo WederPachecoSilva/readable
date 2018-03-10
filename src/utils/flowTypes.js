@@ -1,8 +1,10 @@
 // @flow
 
 export interface Category {
+  id: string;
   name: string;
   path: string;
+  timestamp: number;
 }
 
 export interface Post {
@@ -33,7 +35,7 @@ export interface Posts {
 }
 
 export interface Categories {
-  [index: number]: Category;
+  [id: string]: Category;
 }
 
 export interface Comments {
