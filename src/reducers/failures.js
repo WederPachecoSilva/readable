@@ -4,6 +4,8 @@ import type { Action } from 'redux';
 
 import {
   FETCH_CATEGORIES_FAILURE,
+  ADD_CATEGORY_FAILURE,
+  DELETE_CATEGORY_FAILURE,
   FETCH_POSTS_BY_CATEGORY_FAILURE,
   FETCH_ALL_POSTS_FAILURE,
   ADD_POST_FAILURE,
@@ -24,6 +26,8 @@ const failures = (state: Failures | {} = {}, action: Action) => {
 
   switch (type) {
     case FETCH_CATEGORIES_FAILURE:
+    case ADD_CATEGORY_FAILURE:
+    case DELETE_CATEGORY_FAILURE:
     case FETCH_POSTS_BY_CATEGORY_FAILURE:
     case FETCH_ALL_POSTS_FAILURE:
     case ADD_POST_FAILURE:
