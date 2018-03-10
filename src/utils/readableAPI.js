@@ -24,6 +24,30 @@ async function getCategories(): Promise<Categories> {
 }
 
 /**
+ * Add a new category
+ */
+function addCategory(category: Category): Promise<Category> {
+  return fetch(BASE_URL + '/categories', {
+    headers: {
+      Authorization: 'readable-app',
+      'Content-Type': 'application/json',
+    },
+    method: 'post',
+    body: JSON.stringify(category),
+  }).then(res => res.json());
+}
+
+/**
+ * Delete a category
+ */
+function deleteCategory(id: string): Promise<Category> {
+  return fetch(BASE_URL + '/categories' + id, {
+    headers: { Authorization: 'readable-app' },
+    method: 'DELETE',
+  }).then(res => res.json());
+}
+
+/**
  * Get all of the posts for a particular category
  */
 function getPostsByCategory(category: string): Promise<Posts> {
