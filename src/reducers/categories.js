@@ -3,6 +3,7 @@
 import { Action } from 'redux';
 
 import { Categories } from '../utils/flowTypes';
+import { deleteProperty } from '../utils/helpers';
 import {
   FETCH_CATEGORIES_SUCCESS,
   ADD_CATEGORY_SUCCESS,
@@ -16,8 +17,10 @@ const categories = (state: Categories | {} = {}, action: Action) => {
     case FETCH_CATEGORIES_SUCCESS:
       return payload;
 
-    case ADD_CATEGORY_SUCCESS:
     case DELETE_CATEGORY_SUCCESS:
+      return deleteProperty(state, payload.id);
+
+    case ADD_CATEGORY_SUCCESS:
       return { ...state, [payload.id]: payload };
 
     default:
