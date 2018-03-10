@@ -12,9 +12,9 @@ const cachedState = loadState();
 const store = createStore(index, cachedState, applyMiddleware(ReduxThunk));
 
 // Ignores UI and failure state
-const { posts, comments, categories } = store.getState();
+const { posts, comments, categories, failures } = store.getState();
 store.subscribe(
-  throttle(() => saveState({ posts, comments, categories }, 1000))
+  throttle(() => saveState({ posts, comments, categories, failures }, 1000))
 );
 
 export default store;
