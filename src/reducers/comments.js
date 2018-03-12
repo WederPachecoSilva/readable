@@ -10,7 +10,7 @@ import {
   UPDATE_COMMENT_SUCCESS,
   DELETE_COMMENT_SUCCESS,
 } from '../actions/types';
-import type { Comment, Comments } from '../utils/flowTypes';
+import type { Comments } from '../utils/flowTypes';
 import { deleteProperty } from '../utils/helpers';
 
 const comments = (state: Comments | {} = {}, action: Action) => {

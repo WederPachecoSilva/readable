@@ -94,6 +94,10 @@ export function votePost(id: string, vote: 'downVote' | 'upVote') {
   return async (dispatch: Dispatch) => {
     try {
       const response = await API.votePost(id, vote);
+      dispatch({
+        type: VOTE_POST_SUCCESS,
+        payload: response,
+      });
     } catch (error) {
       dispatch({
         type: VOTE_POST_FAILURE,
