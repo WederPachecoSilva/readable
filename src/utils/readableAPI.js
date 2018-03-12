@@ -10,17 +10,15 @@ import type {
   Categories,
   Category,
 } from './flowTypes';
-import {
-  BASE_URL
-} from '../../config';
+import { BASE_URL } from '../config';
 
 /**
  * Get all post categories available
  */
-async function getCategories(): Promise < Categories > {
+async function getCategories(): Promise<Categories> {
   const categories = await fetch(BASE_URL + '/categories', {
     headers: {
-      Authorization: 'readable-app'
+      Authorization: 'readable-app',
     },
     method: 'GET',
   }).then(res => res.json());
@@ -30,7 +28,7 @@ async function getCategories(): Promise < Categories > {
 /**
  * Add a new category
  */
-function addCategory(category: Category): Promise < Category > {
+function addCategory(category: Category): Promise<Category> {
   return fetch(BASE_URL + '/categories', {
     headers: {
       Authorization: 'readable-app',
@@ -44,10 +42,10 @@ function addCategory(category: Category): Promise < Category > {
 /**
  * Delete a category
  */
-function deleteCategory(id: string): Promise < Category > {
+function deleteCategory(id: string): Promise<Category> {
   return fetch(BASE_URL + '/categories' + id, {
     headers: {
-      Authorization: 'readable-app'
+      Authorization: 'readable-app',
     },
     method: 'DELETE',
   }).then(res => res.json());
@@ -56,7 +54,7 @@ function deleteCategory(id: string): Promise < Category > {
 /**
  * Get all of the posts for a particular category
  */
-function getPostsByCategory(category: string): Promise < Posts > {
+function getPostsByCategory(category: string): Promise<Posts> {
   return fetch(BASE_URL + '/' + category + '/posts', {
     headers: {
       Authorization: 'readable-app',
@@ -68,10 +66,10 @@ function getPostsByCategory(category: string): Promise < Posts > {
 /**
  * Get all of the posts
  */
-function getPosts(): Promise < Posts > {
+function getPosts(): Promise<Posts> {
   return fetch(BASE_URL + '/posts', {
     headers: {
-      Authorization: 'readable-app'
+      Authorization: 'readable-app',
     },
     method: 'GET',
   }).then(res => res.json());
@@ -80,7 +78,7 @@ function getPosts(): Promise < Posts > {
 /**
  * Add a new port
  */
-function addPost(post: Post): Promise < Post > {
+function addPost(post: Post): Promise<Post> {
   return fetch(BASE_URL + '/posts', {
     headers: {
       Authorization: 'readable-app',
@@ -94,10 +92,10 @@ function addPost(post: Post): Promise < Post > {
 /**
  * Get the details of a single post
  */
-function getPost(id: string): Promise < Post > {
+function getPost(id: string): Promise<Post> {
   return fetch(BASE_URL + '/posts/' + id, {
     headers: {
-      Authorization: 'readable-app'
+      Authorization: 'readable-app',
     },
     method: 'GET',
   }).then(res => res.json());
@@ -106,7 +104,7 @@ function getPost(id: string): Promise < Post > {
 /**
  * Used for voting on a post
  */
-function votePost(id: string, vote: 'upVote' | 'downVote'): Promise < Post > {
+function votePost(id: string, vote: 'upVote' | 'downVote'): Promise<Post> {
   return fetch(BASE_URL + '/posts/' + id, {
     headers: {
       Authorization: 'readable-app',
@@ -124,9 +122,9 @@ function updatePost(
   id: string,
   postUpdate: {
     title: string,
-    body: string
+    body: string,
   }
-): Promise < Post > {
+): Promise<Post> {
   return fetch(BASE_URL + '/posts/' + id, {
     headers: {
       Authorization: 'readable-app',
@@ -141,10 +139,10 @@ function updatePost(
  * Sets the deleted flag for a post to 'true'.
  * Sets the parentDeleted flag for all child comments to 'true'
  */
-function deletePost(id: string): Promise < Post > {
+function deletePost(id: string): Promise<Post> {
   return fetch(BASE_URL + '/posts' + id, {
     headers: {
-      Authorization: 'readable-app'
+      Authorization: 'readable-app',
     },
     method: 'DELETE',
   }).then(res => res.json());
@@ -153,10 +151,10 @@ function deletePost(id: string): Promise < Post > {
 /**
  * Get all the comments for a single post.
  */
-function getCommentsByPost(postId: string): Promise < Comments > {
+function getCommentsByPost(postId: string): Promise<Comments> {
   return fetch(BASE_URL + '/posts' + postId + '/comments', {
     headers: {
-      Authorization: 'readable-app'
+      Authorization: 'readable-app',
     },
     method: 'GET',
   }).then(res => res.json());
@@ -165,7 +163,7 @@ function getCommentsByPost(postId: string): Promise < Comments > {
 /**
  * Add a comment to a post
  */
-function addComment(id: string, comment: Comment): Promise < Comment > {
+function addComment(id: string, comment: Comment): Promise<Comment> {
   return fetch(BASE_URL + '/comments', {
     headers: {
       Authorization: 'readable-app',
@@ -179,10 +177,10 @@ function addComment(id: string, comment: Comment): Promise < Comment > {
 /**
  * Get the details for a single comment
  */
-function getComment(id: string): Promise < Comment > {
+function getComment(id: string): Promise<Comment> {
   return fetch(BASE_URL + '/comments/' + id, {
     headers: {
-      Authorization: 'readable-app'
+      Authorization: 'readable-app',
     },
     method: 'GET',
   }).then(res => res.json());
@@ -194,7 +192,7 @@ function getComment(id: string): Promise < Comment > {
 function voteComment(
   id: string,
   vote: 'downVote' | 'upVote'
-): Promise < Comment > {
+): Promise<Comment> {
   return fetch(BASE_URL + '/comments/' + id, {
     headers: {
       Authorization: 'readable-app',
@@ -212,9 +210,9 @@ function updateComment(
   id: string,
   commentUpdate: {
     timestamp: number,
-    body: string
+    body: string,
   }
-): Promise < Comment > {
+): Promise<Comment> {
   return fetch(BASE_URL + '/comments/' + id, {
     headers: {
       Authorization: 'readable-app',
@@ -228,10 +226,10 @@ function updateComment(
 /**
  * Sets a comment's deleted flag to true
  */
-function deleteComment(id: string): Promise < Comment > {
+function deleteComment(id: string): Promise<Comment> {
   return fetch(BASE_URL + '/comments/' + id, {
     headers: {
-      Authorization: 'readable-app'
+      Authorization: 'readable-app',
     },
     method: 'DELETE',
   }).then(res => res.json());
@@ -253,5 +251,5 @@ export {
   updateComment,
   deleteComment,
   addCategory,
-  deleteCategory
+  deleteCategory,
 };
