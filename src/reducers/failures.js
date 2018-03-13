@@ -40,7 +40,7 @@ const failures = (state: Failures | {} = {}, action: Action) => {
     case FETCH_COMMENT_FAILURE:
     case VOTE_COMMENT_FAILURE:
     case DELETE_COMMENT_FAILURE:
-      return { ...state, payload };
+      return { ...state, ...payload };
 
     default:
       return state;
