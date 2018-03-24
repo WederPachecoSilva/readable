@@ -23,7 +23,6 @@ class AddPost extends React.Component {
   handleSubmit = event => {
     const { title, body, author, category } = this.state;
     event.preventDefault();
-    console.log(this.state);
     // All fields must be filled up
     if (!title || !body || !author || !category) {
       this.setState({ error: true });

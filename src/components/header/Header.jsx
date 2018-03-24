@@ -57,6 +57,7 @@ class Header extends React.Component {
 
 const styles = {
   container: {
+    marginBottom: '1em',
     background: 'linear-gradient(to right, lightBlue, white)',
     borderBottom: '0.5px black solid',
   },
