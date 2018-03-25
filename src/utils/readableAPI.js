@@ -43,7 +43,7 @@ function addCategory(category: Category): Promise<Category> {
  * Delete a category
  */
 function deleteCategory(id: string): Promise<Category> {
-  return fetch(BASE_URL + '/categories' + id, {
+  return fetch(BASE_URL + '/categories/' + id, {
     headers: {
       Authorization: 'readable-app',
     },
@@ -140,7 +140,7 @@ function updatePost(
  * Sets the parentDeleted flag for all child comments to 'true'
  */
 function deletePost(id: string): Promise<Post> {
-  return fetch(BASE_URL + '/posts' + id, {
+  return fetch(BASE_URL + '/posts/' + id, {
     headers: {
       Authorization: 'readable-app',
     },
@@ -152,7 +152,7 @@ function deletePost(id: string): Promise<Post> {
  * Get all the comments for a single post.
  */
 function getCommentsByPost(postId: string): Promise<Comments> {
-  return fetch(BASE_URL + '/posts' + postId + '/comments', {
+  return fetch(BASE_URL + '/posts/' + postId + '/comments', {
     headers: {
       Authorization: 'readable-app',
     },
