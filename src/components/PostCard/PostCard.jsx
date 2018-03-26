@@ -8,15 +8,15 @@ import {
   CardActions,
   IconButton,
   Avatar,
-  Grid,
-  Menu,
   CardContent,
   Typography,
-  MenuItem,
+  Grid,
 } from 'material-ui';
-import { deletePost } from '../actions/posts';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import { Link } from 'react-router-dom';
+
+import PostCardMenu from './PostCardMenu';
+import { deletePost } from '../../actions/posts';
 
 class PostCard extends React.Component {
   state = {
@@ -31,10 +31,13 @@ class PostCard extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  handleDeleteMenu = () => {
+    this.props.dispatch(deletePost(this.props.post.id));
+  };
+
   render() {
-    const anchorEl = this.state;
-    const { post, classes, dispatch } = this.props;
-    const link = `/post/${post.id}`;
+    const { post, classes } = this.props;
+    const postDetailLink = `/post/${post.id}`;
     const editPostLink = `/edit/${post.id}`;
     return (
       <Grid key={post.id} item xs={12} sm={6} md={4}>
@@ -53,26 +56,19 @@ class PostCard extends React.Component {
               </IconButton>
             }
           />
-          <Menu
-            id="menu"
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={this.handleCloseMenu}
-          >
-            <MenuItem>
-              <Link to={editPostLink}>Edit Post</Link>
-            </MenuItem>
-            <MenuItem onClick={() => dispatch(deletePost(post.id))}>
-              Delete Post
-            </MenuItem>
-          </Menu>
+          <PostCardMenu
+            anchorEl={this.state.anchorEl}
+            editPostLink={editPostLink}
+            handleDeleteMenu={this.handleDeleteMenu}
+            handleCloseMenu={this.handleCloseMenu}
+          />
           <CardContent>
             <Typography style={{ textAlign: 'center' }} component="p">
               {post.body}
             </Typography>
           </CardContent>
           <CardActions>
-            <Link style={{ margin: 'auto' }} to={link}>
+            <Link style={{ margin: 'auto' }} to={postDetailLink}>
               See more
             </Link>
           </CardActions>
