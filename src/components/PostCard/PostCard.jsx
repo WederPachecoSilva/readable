@@ -40,7 +40,7 @@ class PostCard extends React.Component {
     const postDetailLink = `/post/${post.id}`;
     const editPostLink = `/edit/${post.id}`;
     return (
-      <Grid key={post.id} item xs={12} sm={6} md={4}>
+      <Grid key={post.id} item xs={12} sm={10} md={8}>
         <Card>
           <CardHeader
             avatar={
