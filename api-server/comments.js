@@ -39,14 +39,11 @@ function getData(token) {
 function getByParent(token, parentId) {
   return new Promise(res => {
     let comments = getData(token);
-
-    // Changes it for better normalization
-    // let keys = Object.keys(comments);
-    // let filtered_keys = keys.filter(
-    //   key => comments[key].parentId === parentId && !comments[key].deleted
-    // );
-    // res(filtered_keys.map(key => comments[key]));
-    res(posts);
+    let keys = Object.keys(comments);
+    let filtered_keys = keys.filter(
+      key => comments[key].parentId === parentId && !comments[key].deleted
+    );
+    res(filtered_keys.map(key => comments[key]));
   });
 }
 
