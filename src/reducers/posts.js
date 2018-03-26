@@ -17,7 +17,10 @@ export default function posts(state: Posts | {} = {}, action: Action) {
 
   switch (type) {
     case FETCH_ALL_POSTS_SUCCESS:
-      return payload;
+      return payload.reduce((acc, post) => {
+        acc[post.id] = post;
+        return acc;
+      }, {});
 
     case DELETE_POST_SUCCESS:
     case ADD_POST_SUCCESS:

@@ -17,8 +17,8 @@ const comments = (state: Comments | {} = {}, action: Action) => {
 
   switch (type) {
     case FETCH_COMMENTS_BY_POST_SUCCESS:
-      return payload.reduce((acc, post) => {
-        acc[post.id] = post;
+      return payload.reduce((acc, comment) => {
+        acc[comment.id] = comment;
         return acc;
       }, {});
 
