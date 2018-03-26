@@ -13,23 +13,7 @@
 import * as API from './readableAPI';
 import fetchMock from 'fetch-mock';
 
-const extend = {
-  toHaveProperties(received, args) {
-    const receivedProperties = Object.getOwnPropertyNames(received);
-    const pass = !args.some(val => receivedProperties.indexOf(val) === -1);
-    if (pass) {
-      return {
-        message: () => `expected ${received} not to have properties of ${args}`,
-        pass: true,
-      };
-    } else {
-      return {
-        message: () => `expected ${received} to have properties of ${args}`,
-        pass: false,
-      };
-    }
-  },
-};
+import extend from './matchers';
 
 describe('Readable API calls', () => {
   const { arrayContaining, objectContaining } = expect;
