@@ -11,7 +11,6 @@ import {
   UPDATE_POST_SUCCESS,
 } from '../actions/types';
 import type { Posts } from '../utils/flowTypes';
-import { deleteProperty } from '../utils/helpers';
 
 export default function posts(state: Posts | {} = {}, action: Action) {
   const { payload, type } = action;
@@ -21,8 +20,6 @@ export default function posts(state: Posts | {} = {}, action: Action) {
       return payload;
 
     case DELETE_POST_SUCCESS:
-      return deleteProperty(state, payload.id);
-
     case ADD_POST_SUCCESS:
     case VOTE_POST_SUCCESS:
     case FETCH_POST_SUCCESS:
