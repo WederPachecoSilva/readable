@@ -11,7 +11,6 @@ import {
   DELETE_COMMENT_SUCCESS,
 } from '../actions/types';
 import type { Comments } from '../utils/flowTypes';
-import { deleteProperty } from '../utils/helpers';
 
 const comments = (state: Comments | {} = {}, action: Action) => {
   const { type, payload } = action;
@@ -24,9 +23,6 @@ const comments = (state: Comments | {} = {}, action: Action) => {
       }, {});
 
     case DELETE_COMMENT_SUCCESS:
-      const finalObject = deleteProperty(state, payload.id);
-      return finalObject;
-
     case FETCH_COMMENT_SUCCESS:
     case UPDATE_COMMENT_SUCCESS:
     case VOTE_COMMENT_SUCCESS:
