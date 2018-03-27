@@ -13,7 +13,7 @@ import {
   Grid,
 } from 'material-ui';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import PostCardMenu from './PostCardMenu';
 import { deletePost } from '../../actions/posts';
@@ -36,7 +36,7 @@ class PostCard extends React.Component {
   };
 
   render() {
-    const { post, classes } = this.props;
+    const { post, classes, location } = this.props;
     const postDetailLink = `/post/${post.id}`;
     const editPostLink = `/edit/${post.id}`;
     return (
@@ -50,6 +50,7 @@ class PostCard extends React.Component {
             }
             title={post.title}
             subheader={post.timestamp}
+            // @ts-ignore
             action={
               <IconButton onClick={this.openMenu}>
                 <MoreVertIcon />
@@ -68,9 +69,11 @@ class PostCard extends React.Component {
             </Typography>
           </CardContent>
           <CardActions>
-            <Link style={{ margin: 'auto' }} to={postDetailLink}>
-              See more
-            </Link>
+            {location.pathname !== postDetailLink && (
+              <Link style={{ margin: 'auto' }} to={postDetailLink}>
+                See more
+              </Link>
+            )}
           </CardActions>
         </Card>
       </Grid>
@@ -82,4 +85,4 @@ const styles = {
   avatar: { marginRight: '1em', marginLeft: '1em' },
 };
 
-export default withStyles(styles)(PostCard);
+export default withRouter(withStyles(styles)(PostCard));
