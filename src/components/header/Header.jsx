@@ -41,12 +41,16 @@ class Header extends React.Component {
         <NavbarToggler onClick={this.toggleNav} />
         <Collapse navbar isOpen={this.state.isOpen}>
           <Nav style={styles.nav} className="ml-auto" navbar>
-            <Link style={styles.link} to="/">
-              <NavItem>Home</NavItem>
-            </Link>
-            <Link style={styles.link} to="/add">
-              <NavItem>Add Post</NavItem>
-            </Link>
+            {pathname !== '/' && (
+              <Link style={styles.link} to="/">
+                <NavItem>Home</NavItem>
+              </Link>
+            )}
+            {pathname !== '/add' && (
+              <Link style={styles.link} to="/add">
+                <NavItem>Add Post</NavItem>
+              </Link>
+            )}
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Subject
