@@ -14,11 +14,18 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { fetchCategories } from '../../actions/categories';
 
 class Header extends React.Component {
   state = {
     isOpen: false,
   };
+
+  componentDidMount() {
+    this.props.dispatch(fetchCategories());
+  }
 
   toggleNav = () => {
     this.setState({ isOpen: !this.state.isOpen });
@@ -26,6 +33,8 @@ class Header extends React.Component {
 
   render() {
     const { pathname } = this.props.location;
+    const { categories } = this.props;
+    const catIds = Object.keys(categories);
     return (
       <Navbar light expand="md" style={styles.container}>
         <NavbarBrand style={styles.brand}>Readable</NavbarBrand>
@@ -36,16 +45,18 @@ class Header extends React.Component {
               <NavItem>Home</NavItem>
             </Link>
             <Link style={styles.link} to="/add">
-              <NavItem>Login</NavItem>
+              <NavItem>Add Post</NavItem>
             </Link>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Subject
               </DropdownToggle>
               <DropdownMenu>
-                <DropdownItem>React</DropdownItem>
-                <DropdownItem>React Native</DropdownItem>
-                <DropdownItem>Redux</DropdownItem>
+                {catIds.map(id => (
+                  <Link key={id} to={`/posts/${categories[id].path}`}>
+                    <DropdownItem>{categories[id].name}</DropdownItem>
+                  </Link>
+                ))}
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
@@ -74,4 +85,8 @@ const styles = {
   },
 };
 
-export default withRouter(Header);
+const mapState = ({ categories }) => ({
+  categories,
+});
+
+export default withRouter(connect(mapState)(Header));
