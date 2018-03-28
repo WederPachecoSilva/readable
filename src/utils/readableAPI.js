@@ -111,7 +111,7 @@ function votePost(id: string, vote: 'upVote' | 'downVote'): Promise<Post> {
       'Content-Type': 'application/json',
     },
     method: 'POST',
-    body: JSON.stringify(vote),
+    body: JSON.stringify({ option: vote }),
   }).then(res => res.json());
 }
 

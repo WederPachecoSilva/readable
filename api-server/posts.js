@@ -12,7 +12,8 @@ const defaultData = {
     body: 'Everyone says so after all.',
     author: 'thingtwo',
     category: 'react',
-    voteScore: 6,
+    likeCount: 13,
+    dislikeCount: 5,
     deleted: false,
     commentCount: 2,
   },
@@ -23,7 +24,8 @@ const defaultData = {
     body: 'Just kidding. It takes more than 10 minutes to learn technology.',
     author: 'thingone',
     category: 'redux',
-    voteScore: -5,
+    likeCount: 3,
+    dislikeCount: 5,
     deleted: false,
     commentCount: 0,
   },
@@ -90,10 +92,10 @@ function vote(token, id, option) {
     let post = posts[id];
     switch (option) {
       case 'upVote':
-        post.voteScore = post.voteScore + 1;
+        post.likeCount = post.likeCount + 1;
         break;
       case 'downVote':
-        post.voteScore = post.voteScore - 1;
+        post.dislikeCount = post.dislikeCount + 1;
         break;
       default:
         console.log(`posts.vote received incorrect parameter: ${option}`);
