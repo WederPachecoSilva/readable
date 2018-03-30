@@ -6,17 +6,17 @@ import {
   Card,
   CardHeader,
   CardActions,
-  IconButton,
   Avatar,
   CardContent,
   Typography,
   Grid,
 } from 'material-ui';
-import MoreVertIcon from 'material-ui-icons/MoreVert';
 import { Link, withRouter } from 'react-router-dom';
+import moment from 'moment';
 
-import PostCardMenu from './PostCardMenu';
-import { deletePost } from '../../actions/posts';
+import PostCardMenu from './Menu';
+import { deletePost, votePost } from '../../actions/posts';
+import CardHeaderAction from './HeaderAction';
 
 class PostCard extends React.Component {
   state = {
@@ -35,10 +35,16 @@ class PostCard extends React.Component {
     this.props.dispatch(deletePost(this.props.post.id));
   };
 
+  votePost = vote => {
+    this.props.dispatch(votePost(this.props.post.id, vote));
+  };
+
   render() {
     const { post, classes, location } = this.props;
     const postDetailLink = `/post/${post.id}`;
     const editPostLink = `/edit/${post.id}`;
+    const time = moment(post.timestamp).format('DD/MM/YYYY, h:mm:ssa');
+
     return (
       <Grid key={post.id} item xs={12} sm={10} md={8}>
         <Card>
@@ -49,12 +55,16 @@ class PostCard extends React.Component {
               </Avatar>
             }
             title={post.title}
-            subheader={post.timestamp}
+            subheader={time}
             // @ts-ignore
             action={
-              <IconButton onClick={this.openMenu}>
-                <MoreVertIcon />
-              </IconButton>
+              <CardHeaderAction
+                openMenu={this.openMenu}
+                likeCount={post.likeCount}
+                dislikeCount={post.dislikeCount}
+                commentCount={post.commentCount}
+                votePost={this.votePost}
+              />
             }
           />
           <PostCardMenu
