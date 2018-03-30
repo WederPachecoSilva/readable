@@ -77,7 +77,8 @@ function add(token, post) {
       body: post.body,
       author: post.author,
       category: post.category,
-      voteScore: 1,
+      upVote: 0,
+      downVote: 0,
       deleted: false,
       commentCount: 0,
     };
