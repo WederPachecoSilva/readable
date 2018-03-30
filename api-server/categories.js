@@ -14,14 +14,14 @@ const defaultData = {
     id: reactId,
     name: 'react',
     path: 'react',
-    timestamp: new Date().toLocaleString(),
+    timestamp: new Date(),
     deleted: false,
   },
   [reduxId]: {
     id: reduxId,
     name: 'redux',
     path: 'redux',
-    timestamp: new Date().toLocaleString(),
+    timestamp: new Date(),
     deleted: false,
   },
 };

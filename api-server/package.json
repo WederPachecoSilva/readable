@@ -2,7 +2,6 @@
   "name": "readable-server",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Wéder Pacheco da Silva",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.1",
