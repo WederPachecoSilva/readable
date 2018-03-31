@@ -53,10 +53,10 @@ export function fetchComment(id: string) {
   };
 }
 
-export function addComment(id: string, comment: Comment) {
+export function addComment(comment: Comment) {
   return async (dispatch: Dispatch) => {
     try {
-      const response = await API.addComment(id, comment);
+      const response = await API.addComment(comment);
       dispatch({ type: ADD_COMMENT_SUCCESS, payload: response });
     } catch (error) {
       dispatch({

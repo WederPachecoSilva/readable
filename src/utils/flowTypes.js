@@ -14,7 +14,8 @@ export interface Post {
   body: string;
   author: string;
   category: string;
-  voteScore: number;
+  upVote?: number;
+  downVote?: number;
   deleted: boolean;
   commentCount: number;
 }
@@ -25,9 +26,10 @@ export interface Comment {
   timestamp: number;
   body: string;
   author: string;
-  voteScore: number;
-  deleted: boolean;
-  parentDeleted: boolean;
+  upvote?: number;
+  downVote?: number;
+  deleted?: boolean;
+  parentDeleted?: boolean;
 }
 
 export interface Posts {

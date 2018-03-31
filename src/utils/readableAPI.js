@@ -163,7 +163,7 @@ function getCommentsByPost(postId: string): Promise<Comments> {
 /**
  * Add a comment to a post
  */
-function addComment(id: string, comment: Comment): Promise<Comment> {
+function addComment(comment: Comment): Promise<Comment> {
   return fetch(BASE_URL + '/comments', {
     headers: {
       Authorization: 'readable-app',
