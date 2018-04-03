@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Select = ({ label, name, value, handleChange, children }) => (
   <div>
@@ -19,6 +20,14 @@ const Select = ({ label, name, value, handleChange, children }) => (
 const styles = {
   label: {},
   input: {},
+};
+
+Select.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  children: PropTypes.any.isRequired,
 };
 
 export default Select;

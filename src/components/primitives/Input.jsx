@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FieldInput = ({ handleChange, name, value, label }) => (
   <div style={styles.container}>
@@ -21,6 +22,13 @@ const styles = {
   },
   label: {},
   input: {},
+};
+
+FieldInput.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default FieldInput;
