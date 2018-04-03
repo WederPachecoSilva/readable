@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import { connect } from 'react-redux';
-import Grid from 'material-ui/Grid';
+import { Grid, withStyles } from 'material-ui';
+import PropTypes from 'prop-types';
 
 import { fetchAllPosts } from '../../actions/posts';
 import PostCard from '../PostCard/PostCard';
@@ -14,7 +15,7 @@ class Root extends React.Component {
   }
 
   render() {
-    const { posts, dispatch } = this.props;
+    const { posts, dispatch, classes } = this.props;
     const ids = Object.keys(posts);
     return (
       <React.Fragment>
@@ -22,7 +23,7 @@ class Root extends React.Component {
           return posts[id].deleted === false ? (
             <Grid container justify="center" key={id}>
               <PostCard
-                style={{ margin: '2em' }}
+                className={classes.postCard}
                 post={posts[id]}
                 dispatch={dispatch}
               />
@@ -36,4 +37,18 @@ class Root extends React.Component {
 
 const mapState = state => ({ posts: state.posts });
 
-export default withErrorBoundary(connect(mapState)(Root));
+const styles = {
+  postCard: {
+    margin: '2em',
+  },
+};
+
+Root.propTypes = {
+  posts: PropTypes.object,
+  dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.shape({
+    postCard: PropTypes.object.isRequired,
+  }),
+};
+
+export default withErrorBoundary(withStyles(styles)(connect(mapState)(Root)));
