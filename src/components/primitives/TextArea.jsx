@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TextArea = ({ name, rows, value, handleChange, label }) => (
-  <div>
+  <div style={styles.container}>
     <label style={styles.label} htmlFor={name}>
       {label}
     </label>
@@ -16,6 +16,10 @@ const TextArea = ({ name, rows, value, handleChange, label }) => (
 );
 
 const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   label: {},
   input: {},
 };

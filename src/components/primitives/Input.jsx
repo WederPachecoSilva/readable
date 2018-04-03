@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FieldInput = ({ handleChange, name, value, label }) => (
-  <div>
+  <div style={styles.container}>
     <label style={styles.label} htmlFor={name}>
       {label}
     </label>
@@ -15,6 +15,10 @@ const FieldInput = ({ handleChange, name, value, label }) => (
 );
 
 const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   label: {},
   input: {},
 };
