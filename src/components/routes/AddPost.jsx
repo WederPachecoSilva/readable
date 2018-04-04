@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { v4 } from 'uuid';
+import PropTypes from 'prop-types';
 
 import Alert from '../primitives/Alert';
 import Input from '../primitives/Input';
@@ -115,6 +116,11 @@ const styles = {
     margin: 'auto',
     marginTop: '2em',
   },
+};
+
+AddPost.propTypes = {
+  dispatch: PropTypes.func,
+  categories: PropTypes.object,
 };
 
 export default withErrorBoundary(connect(mapState)(AddPost));
