@@ -47,7 +47,7 @@ Root.propTypes = {
   posts: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.shape({
-    postCard: PropTypes.object.isRequired,
+    postCard: PropTypes.string.isRequired,
   }),
 };
 
