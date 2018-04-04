@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import { CircularProgress } from 'material-ui';
 
-import Header from './components/header/Header';
+import Header from './components/Header/Header';
 
 const Loading = () => <CircularProgress size={50} />;
 
