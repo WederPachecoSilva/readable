@@ -25,7 +25,7 @@ const styles = {
   input: {},
 };
 
-Select.propTypes = {
+TextArea.propTypes = {
   handleChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
