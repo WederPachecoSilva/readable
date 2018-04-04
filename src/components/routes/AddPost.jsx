@@ -2,12 +2,15 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Alert } from 'reactstrap';
 import { v4 } from 'uuid';
 
+import Alert from '../primitives/Alert';
+import Input from '../primitives/Input';
+import TextArea from '../primitives/TextArea';
+import Select from '../primitives/Select';
 import { addPost } from '../../actions/posts';
-import withErrorBoundary from '../errorHandling/withErrorBoundary';
 import { fetchCategories } from '../../actions/categories';
+import withErrorBoundary from '../errorHandling/withErrorBoundary';
 
 class AddPost extends React.Component {
   state = { title: '', body: '', author: '', category: '', error: false };
@@ -23,15 +26,15 @@ class AddPost extends React.Component {
   handleSubmit = event => {
     const { title, body, author, category } = this.state;
     event.preventDefault();
-    // All fields must be filled up
     if (!title || !body || !author || !category) {
       this.setState({ error: true });
       return;
     }
-
     const id = v4();
-    const timestamp = new Date().toLocaleString();
-    this.props.dispatch(addPost({ id, timestamp, ...this.state }));
+    const timestamp = new Date();
+    this.props.dispatch(
+      addPost({ id, timestamp, title, body, author, category })
+    );
   };
 
   render() {
@@ -39,72 +42,48 @@ class AddPost extends React.Component {
     const { title, body, author, category, error } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit} style={styles.container}>
-        <div style={styles.authorContainer}>
-          <label style={styles.authorLabel} htmlFor="author">
-            Author
-          </label>
-          <input
-            style={styles.authorInput}
-            type="author"
-            name="author"
-            value={this.state.author}
-            onChange={this.handleChange}
-          />
-          {!author &&
-            error && (
-              <Alert color="danger">Author field must be provided</Alert>
-            )}
-        </div>
-        <div style={styles.titleContainer}>
-          <label style={styles.titleLabel} htmlFor="title">
-            Title
-          </label>
-          <input
-            style={styles.titleInput}
-            type="text"
-            name="title"
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
-          {!title &&
-            error && <Alert color="danger">Title field must be provided</Alert>}
-        </div>
-        <div style={styles.categoryContainer}>
-          <label style={styles.categoryLabel} htmlFor="category">
-            Select a category
-          </label>
-          <select
-            style={styles.categoryInput}
-            name="category"
-            value={this.state.category}
-            onChange={this.handleChange}
-          >
-            {/* Defaults to empty option */}
-            <option />
-            {Object.keys(categories).map(id => (
-              <option key={id}>{categories[id].name.toUpperCase()}</option>
-            ))}
-          </select>
-          {!category &&
-            error && (
-              <Alert color="danger">Category field must be provided</Alert>
-            )}
-        </div>
-        <div style={styles.bodyContainer}>
-          <label style={styles.bodyLabel} htmlFor="body">
-            Message
-          </label>
-          <textarea
-            rows={5}
-            style={styles.bodyInput}
-            name="body"
-            value={this.state.body}
-            onChange={this.handleChange}
-          />
-        </div>
-        {!body &&
-          error && <Alert color="danger">Message field must be provided</Alert>}
+      <form style={styles.form} onSubmit={this.handleSubmit}>
+        <Input
+          name="author"
+          value={author}
+          handleChange={this.handleChange}
+          label="Author"
+        />
+        {!author && error && <Alert>Author field must be provided</Alert>}
+        <hr />
+
+        <Input
+          name="title"
+          value={title}
+          handleChange={this.handleChange}
+          label="Title"
+        />
+        {!title && error && <Alert>Title field must be provided</Alert>}
+        <hr />
+
+        <Select
+          name="category"
+          value={this.state.category}
+          handleChange={this.handleChange}
+          label="Select a category"
+        >
+          <option />
+          {Object.keys(categories).map(id => (
+            <option key={id}>{categories[id].name.toUpperCase()}</option>
+          ))}
+        </Select>
+        {!category && error && <Alert>Category field must be provided</Alert>}
+        <hr />
+
+        <TextArea
+          name="body"
+          value={this.state.body}
+          rows={5}
+          label="Message"
+          handleChange={this.handleChange}
+        />
+        {!body && error && <Alert>Message field must be provided</Alert>}
+
         <input type="submit" value="Submit" style={styles.button} />
       </form>
     );
@@ -114,48 +93,28 @@ class AddPost extends React.Component {
 const mapState = state => {
   return {
     categories: state.categories,
-    state,
   };
 };
 
-export default withErrorBoundary(connect(mapState)(AddPost));
-
 const styles = {
-  container: {
+  button: {
+    width: '10em',
+    height: '2.3em',
+    backgroundColor: '#28739E',
+    color: 'black',
+    border: '1px #28739E solid',
+    borderRadius: '10px',
+    margin: 'auto',
+    marginTop: '1em',
+  },
+  form: {
     display: 'flex',
     flexDirection: 'column',
-    // margin: '1em',
+    justifyContent: 'center',
+    width: '80%',
+    margin: 'auto',
     marginTop: '2em',
   },
-  authorContainer: {
-    display: 'flex',
-    margin: '1em',
-    flexDirection: 'column',
-  },
-  authorLabel: {},
-  authorInput: {},
-  titleContainer: {
-    display: 'flex',
-    margin: '1em',
-    flexDirection: 'column',
-  },
-  titleLabel: {},
-  titleInput: {},
-  categoryContainer: {
-    display: 'flex',
-    margin: '0.5em',
-    flexDirection: 'column',
-  },
-  categoryLabel: {},
-  categoryInput: {},
-  bodyContainer: {
-    display: 'flex',
-    margin: '0.5em',
-    flexDirection: 'column',
-  },
-  bodyLabel: {},
-  bodyInput: {},
-  button: {
-    margin: '0.5em',
-  },
 };
+
+export default withErrorBoundary(connect(mapState)(AddPost));
