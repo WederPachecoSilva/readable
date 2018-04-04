@@ -1,8 +1,8 @@
 // @ts-check
 
 import * as React from 'react';
-// import { Formik, Form, Field } from 'formik';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Alert from '../primitives/Alert';
 import Input from '../primitives/Input';
@@ -68,12 +68,6 @@ class EditPost extends React.Component {
   }
 }
 
-const mapState = state => ({
-  posts: state.posts,
-});
-
-export default withErrorBoundary(connect(mapState)(EditPost));
-
 const styles = {
   container: {
     display: 'flex',
@@ -104,3 +98,15 @@ const styles = {
     borderRadius: '10px',
   },
 };
+
+const mapState = state => ({
+  posts: state.posts,
+});
+
+EditPost.propTypes = {
+  dispatch: PropTypes.func,
+  history: PropTypes.object,
+  match: PropTypes.object,
+};
+
+export default withErrorBoundary(connect(mapState)(EditPost));
