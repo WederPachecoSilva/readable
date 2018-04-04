@@ -7,7 +7,7 @@ const Select = ({ label, name, value, handleChange, children }) => (
       {label}
     </label>
     <select
-      style={styles.input}
+      style={styles.select}
       name={name}
       value={value}
       onChange={handleChange}
@@ -19,7 +19,7 @@ const Select = ({ label, name, value, handleChange, children }) => (
 
 const styles = {
   label: {},
-  input: {},
+  select: { display: 'flex' },
 };
 
 Select.propTypes = {
