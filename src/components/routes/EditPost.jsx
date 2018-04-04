@@ -1,56 +1,69 @@
 // @ts-check
 
 import * as React from 'react';
-import { Formik, Form, Field } from 'formik';
-import { Alert, Container } from 'reactstrap';
+// import { Formik, Form, Field } from 'formik';
 import { connect } from 'react-redux';
 
+import Alert from '../primitives/Alert';
+import Input from '../primitives/Input';
+import TextArea from '../primitives/TextArea';
 import withErrorBoundary from '../errorHandling/withErrorBoundary';
 import { updatePost, fetchPost } from '../../actions/posts';
 
-const EditForm = ({ errors, touched, isSubmitting }) => (
-  <Container>
-    <Form style={styles.container}>
-      <span>Title</span>
-      <Field style={styles.title} type="title" name="title" />
-      {errors.title &&
-        touched.title && (
-          <Alert color="Danger">Title field must be filled up</Alert>
-        )}
-      <span>Body</span>
-
-      <Field style={styles.body} component="textarea" name="body" />
-      {errors.body &&
-        touched.body && (
-          <Alert color="danger">Post body field must be filled up</Alert>
-        )}
-      <button style={styles.button} type="submit" disabled={isSubmitting}>
-        submit
-      </button>
-    </Form>
-  </Container>
-);
-
 class EditPost extends React.Component {
-  componentWillMount() {
+  state = { title: '', body: '', error: false };
+
+  async componentDidMount() {
     const { id } = this.props.match.params;
-    this.props.dispatch(fetchPost(id));
+    await this.props.dispatch(fetchPost(id));
   }
 
-  render() {
-    const { dispatch, match, history, posts } = this.props;
-    const { id } = match.params;
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
+  handleSubmit = e => {
+    e.preventDefault();
+    const { dispatch, history, match } = this.props;
+    const { title, body } = this.state;
+
+    if (!title || !body) {
+      this.setState({ error: true });
+      return;
+    }
+
+    dispatch(updatePost(match.params.id, { title, body }));
+    history.push('/');
+  };
+
+  render() {
+    const { title, body, error } = this.state;
     return (
-      <Formik
-        initialValues={posts[id]}
-        onSubmit={(values, actions) => {
-          dispatch(updatePost(id, values));
-          actions.setSubmitting(false);
-          history.push('/');
-        }}
-        component={EditForm}
-      />
+      <form style={styles.container} onSubmit={this.handleSubmit}>
+        <Input
+          style={styles.title}
+          name="title"
+          handleChange={this.handleChange}
+          value={this.state.title}
+          label="Title"
+        />
+        <hr />
+        {error && !title && <Alert>Title must be filled up!</Alert>}
+
+        <TextArea
+          style={styles.body}
+          name="body"
+          rows={6}
+          value={this.state.body}
+          handleChange={this.handleChange}
+          label="Message"
+        />
+        {error && !body && <Alert>Message must be filled up!</Alert>}
+
+        <button style={styles.button} type="submit">
+          Submit
+        </button>
+      </form>
     );
   }
 }
@@ -63,10 +76,12 @@ export default withErrorBoundary(connect(mapState)(EditPost));
 
 const styles = {
   container: {
-    marginTop: '1em',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    width: '80%',
+    margin: 'auto',
+    marginTop: '2em',
   },
   title: {
     marginTop: '0.5em',
@@ -78,7 +93,14 @@ const styles = {
     marginBottom: '0.5em',
   },
   button: {
-    marginTop: '0.8em',
-    borderRadius: 5,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: '1em',
+    width: '10em',
+    height: '2.3em',
+    backgroundColor: '#28739E',
+    color: 'black',
+    border: '1px #28739E solid',
+    borderRadius: '10px',
   },
 };
