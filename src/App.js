@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
+import { CircularProgress } from 'material-ui';
 
 import Header from './components/header/Header';
 
-const Loading = () => <p>Loading...</p>;
+const Loading = () => <CircularProgress size={50} />;
 
 // @ts-ignore
 const Root = Loadable({
