@@ -1,5 +1,3 @@
-// @ts-check
-
 import React from 'react';
 import v4 from 'uuid/v4';
 import { connect } from 'react-redux';
@@ -30,7 +28,7 @@ class CommentForm extends React.Component {
     const timestamp = new Date();
     const { post, dispatch } = this.props;
     dispatch(addComment({ id, author, body, timestamp, parentId: post.id }));
-    this.setState({ author: '', body: '' });
+    this.setState({ author: '', body: '', error: false });
   };
 
   render() {
@@ -45,8 +43,8 @@ class CommentForm extends React.Component {
             value={this.state.author}
             label="Author"
           />
+          {error && !author && <Alert>Author field must be filled up!</Alert>}
           <br />
-          {!error && !author && <Alert>Author field must be filled up!</Alert>}
 
           <TextArea
             name="body"
@@ -55,7 +53,7 @@ class CommentForm extends React.Component {
             handleChange={this.handleChange}
             label="Comment"
           />
-          {!error && !author && <Alert>Comment field must be filled up!</Alert>}
+          {error && !body && <Alert>Comment field must be filled up!</Alert>}
 
           <Grid container justify="center">
             <button className={classes.button} type="submit">
