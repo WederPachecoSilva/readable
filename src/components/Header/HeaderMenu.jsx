@@ -5,6 +5,7 @@ import { IconButton, Menu, MenuItem, withStyles } from 'material-ui';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { fetchCategories } from '../../actions/categories';
 
@@ -75,6 +76,12 @@ const styles = {
   iconButton: {
     color: 'grey',
   },
+};
+
+HeaderMenu.propTypes = {
+  categories: PropTypes.object,
+  classes: PropTypes.object.isRequired,
+  dispatch: PropTypes.func,
 };
 
 export default withStyles(styles)(connect(mapState)(HeaderMenu));
