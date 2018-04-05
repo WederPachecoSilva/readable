@@ -28,9 +28,8 @@ class HeaderMenu extends React.Component {
   render() {
     const { categories, classes } = this.props;
     const { anchorEl } = this.state;
-    const catIds = Object.keys(categories);
+    const ids = Object.keys(categories);
     const open = Boolean(anchorEl);
-
     return (
       <div>
         <IconButton
@@ -55,7 +54,7 @@ class HeaderMenu extends React.Component {
           open={open}
           onClose={this.handleClose}
         >
-          {catIds.map(id => (
+          {ids.map(id => (
             <MenuItem key={id}>
               <Link to={`/posts/${categories[id].path}`}>
                 <p>{categories[id].name}</p>
