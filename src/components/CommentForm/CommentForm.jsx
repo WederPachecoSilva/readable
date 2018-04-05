@@ -4,6 +4,7 @@ import React from 'react';
 import v4 from 'uuid/v4';
 import { connect } from 'react-redux';
 import { Grid, withStyles } from 'material-ui';
+import PropTypes from 'prop-types';
 
 import Alert from '../primitives/Alert';
 import Input from '../primitives/Input';
@@ -85,6 +86,12 @@ const styles = {
     border: '1px #28739E solid',
     borderRadius: '10px',
   },
+};
+
+CommentForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  post: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(connect()(CommentForm));
