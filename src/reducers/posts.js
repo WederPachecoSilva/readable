@@ -4,6 +4,7 @@ import { Action } from 'redux';
 
 import {
   FETCH_ALL_POSTS_SUCCESS,
+  FETCH_POSTS_BY_CATEGORY_SUCCESS,
   ADD_POST_SUCCESS,
   DELETE_POST_SUCCESS,
   FETCH_POST_SUCCESS,
@@ -17,6 +18,7 @@ export default function posts(state: Posts | {} = {}, action: Action) {
 
   switch (type) {
     case FETCH_ALL_POSTS_SUCCESS:
+    case FETCH_POSTS_BY_CATEGORY_SUCCESS:
       return payload.reduce((acc, post) => {
         acc[post.id] = post;
         return acc;
