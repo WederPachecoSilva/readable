@@ -1,43 +1,35 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
-import { CircularProgress } from 'material-ui';
 
 import Header from './components/Header/Header';
+import Loading from './components/Loading/Loading';
 
-const Loading = () => <CircularProgress size={50} />;
-
-// @ts-ignore
 const Root = Loadable({
   loader: () => import('./components/routes/Root'),
   loading: Loading,
 });
 
-// @ts-ignore
 const EditPost = Loadable({
   loader: () => import('./components/routes/EditPost'),
   loading: Loading,
 });
 
-// @ts-ignore
 const PostDetail = Loadable({
   loader: () => import('./components/routes/PostDetail'),
   loading: Loading,
 });
 
-// @ts-ignore
 const AddPost = Loadable({
   loader: () => import('./components/routes/AddPost'),
   loading: Loading,
 });
 
-// @ts-ignore
 const PostsByCategory = Loadable({
   loader: () => import('./components/routes/PostsByCategory'),
   loading: Loading,
 });
 
-// @ts-ignore
 const NotFound = Loadable({
   loader: () => import('./components/routes/NotFound'),
   loading: Loading,
