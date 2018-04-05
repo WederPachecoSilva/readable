@@ -36,6 +36,7 @@ class AddPost extends React.Component {
     this.props.dispatch(
       addPost({ id, timestamp, title, body, author, category })
     );
+    this.setState({ error: false });
   };
 
   render() {

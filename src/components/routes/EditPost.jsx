@@ -34,6 +34,7 @@ class EditPost extends React.Component {
 
     dispatch(updatePost(match.params.id, { title, body }));
     history.push('/');
+    this.setState({ error: false });
   };
 
   render() {
