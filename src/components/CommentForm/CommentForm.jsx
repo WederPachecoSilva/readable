@@ -34,6 +34,7 @@ class CommentForm extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { author, body, error } = this.state;
     return (
       <Grid className={classes.container} item md={8} sm={10} xs={12}>
         <form onSubmit={this.handleSubmit}>
@@ -44,6 +45,8 @@ class CommentForm extends React.Component {
             label="Author"
           />
           <br />
+          {!error && !author && <Alert>Author field must be filled up!</Alert>}
+
           <TextArea
             name="body"
             rows={4}
@@ -51,6 +54,8 @@ class CommentForm extends React.Component {
             handleChange={this.handleChange}
             label="Comment"
           />
+          {!error && !author && <Alert>Comment field must be filled up!</Alert>}
+
           <Grid container justify="center">
             <button className={classes.button} type="submit">
               Submit
