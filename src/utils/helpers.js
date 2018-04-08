@@ -23,13 +23,26 @@ export const deleteProperty = (object, property) =>
  * @param {string[]} dates
  * @returns {string[]}
  */
-export const sortDate = (type, dates) => {
+export const sortByDate = (type, dates) => {
   switch (type) {
-    case 'ascendent':
+    case type === 'ascendent':
       return dates.sort((date1, date2) => (date1 > date2 ? 1 : -1));
 
-    case 'descendent':
-      return dates.sort((date1, date2) => (date1 > date2 ? -1 : 1));
+    case type === 'descendent':
+      return dates.sort((date1, date2) => (date1 < date2 ? -1 : 1));
+
+    default:
+      return;
+  }
+};
+
+export const sortByLikes = (type, votes) => {
+  switch (type) {
+    case type === 'upVote':
+      return votes.sort((vote1, vote2) => (vote1 > vote2 ? 1 : -1));
+
+    case type === 'downVote':
+      return votes.sort((vote1, vote2) => (vote1 < vote2 ? -1 : 1));
 
     default:
       return;
