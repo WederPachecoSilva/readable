@@ -83,7 +83,7 @@ export function voteComment(id: string, vote: 'upVote' | 'downVote') {
 
 export function updateComment(
   id: string,
-  commentUpdate: { timestamp: number, body: string }
+  commentUpdate: { author: string, body: string }
 ) {
   return async (dispatch: Dispatch) => {
     try {
