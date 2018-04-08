@@ -15,6 +15,11 @@ const EditPost = Loadable({
   loading: Loading,
 });
 
+const EditComment = Loadable({
+  loader: () => import('./components/routes/EditComment'),
+  loading: Loading,
+});
+
 const PostDetail = Loadable({
   loader: () => import('./components/routes/PostDetail'),
   loading: Loading,
@@ -42,9 +47,10 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Root} />
         <Route path="/posts/:category" component={PostsByCategory} />
-        <Route path="/post/:id" component={PostDetail} />
-        <Route path="/edit/:id" component={EditPost} />
-        <Route path="/add" component={AddPost} />
+        <Route path="/:category/:post_id" component={PostDetail} />
+        <Route path="/edit/comment/:comment_id" component={EditComment} />
+        <Route path="/edit/post/:post_id" component={EditPost} />
+        <Route path="/add/post" component={AddPost} />
         <Route component={NotFound} />
       </Switch>
     </React.Fragment>
