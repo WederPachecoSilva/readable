@@ -209,7 +209,7 @@ function voteComment(
 function updateComment(
   id: string,
   commentUpdate: {
-    timestamp: number,
+    author: string,
     body: string,
   }
 ): Promise<Comment> {
