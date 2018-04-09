@@ -12,8 +12,8 @@ const defaultData = {
     timestamp: 1468166872634,
     body: 'Hi there! I am a COMMENT.',
     author: 'thingtwo',
-    upVote: 6,
-    downVote: 5,
+    likeCount: 6,
+    dislikeCount: 5,
     deleted: false,
     parentDeleted: false,
   },
@@ -23,8 +23,8 @@ const defaultData = {
     timestamp: 1469479767190,
     body: 'Comments. Are. Cool.',
     author: 'thingone',
-    upVote: 5,
-    downVote: 12,
+    likeCount: 5,
+    dislikeCount: 12,
     deleted: false,
     parentDeleted: false,
   },
@@ -83,10 +83,10 @@ function vote(token, id, option) {
     let comment = comments[id];
     switch (option) {
       case 'upVote':
-        comment.upVote = comment.upVote + 1;
+        comment.likeCount = comment.likeCount + 1;
         break;
       case 'downVote':
-        comment.downVote = comment.downVote - 1;
+        comment.dislikeCount = comment.dislikeCount + 1;
         break;
       default:
         console.log(`comments.vote received incorrect parameter: ${option}`);
