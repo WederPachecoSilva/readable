@@ -199,7 +199,8 @@ function voteComment(
       'Content-Type': 'application/json',
     },
     method: 'POST',
-    body: JSON.stringify(vote),
+    method: 'POST',
+    body: JSON.stringify({ option: vote }),
   }).then(res => res.json());
 }
 
