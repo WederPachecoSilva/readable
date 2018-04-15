@@ -1,6 +1,5 @@
 import React from 'react';
 import v4 from 'uuid/v4';
-import { connect } from 'react-redux';
 import { Grid, withStyles } from 'material-ui';
 import PropTypes from 'prop-types';
 
@@ -8,7 +7,6 @@ import Alert from '../primitives/Alert';
 import Input from '../primitives/Input';
 import TextArea from '../primitives/TextArea';
 import { addComment } from '../../actions/comments';
-import { fetchPost } from '../../actions/posts';
 
 class CommentForm extends React.Component {
   state = { author: '', body: '', error: false };
@@ -92,4 +90,4 @@ CommentForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(connect()(CommentForm));
+export default withStyles(styles)(CommentForm);
