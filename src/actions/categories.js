@@ -1,8 +1,6 @@
 // @flow
 
-import {
-  Dispatch
-} from 'redux';
+import { Dispatch } from 'redux';
 
 import {
   FETCH_CATEGORIES_SUCCESS,
@@ -13,9 +11,7 @@ import {
   DELETE_CATEGORY_FAILURE,
 } from './types';
 import * as API from '../utils/readableAPI';
-import {
-  Category
-} from '../utils/flowTypes'
+import { Category } from '../utils/flowTypes';
 
 export const fetchCategories = () => {
   return async (dispatch: Dispatch) => {
@@ -29,7 +25,7 @@ export const fetchCategories = () => {
       dispatch({
         type: FETCH_CATEGORIES_FAILURE,
         payload: {
-          fetchCategoriesFailure: true
+          fetchCategoriesFailure: true,
         },
       });
     }
@@ -39,37 +35,37 @@ export const fetchCategories = () => {
 export const addCategory = (category: Category) => {
   return async (dispatch: Dispatch) => {
     try {
-      const response = await API.addCategory(category)
+      const response = await API.addCategory(category);
       dispatch({
         type: ADD_CATEGORY_SUCCESS,
-        payload: response
-      })
+        payload: response,
+      });
     } catch (error) {
       dispatch({
         type: ADD_CATEGORY_FAILURE,
         payload: {
-          addCategoryFailure: true
-        }
-      })
+          addCategoryFailure: true,
+        },
+      });
     }
-  }
-}
+  };
+};
 
 export const deleteCategory = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
-      const response = await API.deleteCategory(id)
+      const response = await API.deleteCategory(id);
       dispatch({
         type: DELETE_CATEGORY_SUCCESS,
-        payload: response
-      })
+        payload: response,
+      });
     } catch (error) {
       dispatch({
         type: DELETE_CATEGORY_FAILURE,
         payload: {
-          deleteCategoryFailure: true
-        }
-      })
+          deleteCategoryFailure: true,
+        },
+      });
     }
-  }
-}
+  };
+};
