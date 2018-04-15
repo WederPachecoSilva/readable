@@ -1,8 +1,7 @@
-// @ts-check
-
 import React from 'react';
 import { AppBar, Toolbar, Typography } from 'material-ui';
 import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import HeaderMenu from './HeaderMenu';
 
@@ -12,7 +11,7 @@ const Header = ({ location, categories }) => {
     <AppBar position="static" style={styles.container}>
       <Toolbar>
         <Typography variant="title" color="inherit" style={styles.brand}>
-          Title
+          Readable
         </Typography>
         <div style={styles.links}>
           {pathname !== '/' && (
@@ -20,8 +19,8 @@ const Header = ({ location, categories }) => {
               <p>Home</p>
             </Link>
           )}
-          {pathname !== '/add' && (
-            <Link style={styles.link} to="/add">
+          {pathname !== '/add/post' && (
+            <Link style={styles.link} to="/add/post">
               <p>Add Post</p>
             </Link>
           )}
@@ -53,6 +52,11 @@ const styles = {
     marginLeft: 'auto',
     marginRight: '1em',
   },
+};
+
+Header.propTypes = {
+  location: PropTypes.object.isRequired,
+  categories: PropTypes.object,
 };
 
 export default withRouter(Header);
