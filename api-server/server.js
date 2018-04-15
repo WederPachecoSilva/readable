@@ -160,7 +160,7 @@ app.get('/categories', (req, res) => {
 });
 
 app.post('/categories/', (req, res) => {
-  categories.add(req.token, req.params.id).then(
+  categories.add(req.token, req.body).then(
     data => res.send(data),
     error => {
       console.error(error);
