@@ -29,12 +29,12 @@ class CardHeaderAction extends React.Component {
 
   render() {
     const { post, classes } = this.props;
-    const editPostLink = `/edit/${post.id}`;
+    const editPostLink = `/edit/post/${post.id}`;
     const { likeCount, dislikeCount, commentCount } = post;
     return (
       <Grid container justify="center" alignItems="center">
         <Badge
-          className={classes.badge}
+          className={classes.likeCount}
           badgeContent={likeCount}
           onClick={() => this.votePost('upVote')}
           color="primary"
@@ -42,19 +42,22 @@ class CardHeaderAction extends React.Component {
           <ThumbUp />
         </Badge>
         <Badge
+          className={classes.dislikeCount}
           badgeContent={dislikeCount}
           onClick={() => this.votePost('downVote')}
           color="primary"
         >
           <ThumbDown />
         </Badge>
-        <Badge
-          className={classes.badge}
-          badgeContent={commentCount}
-          color="primary"
-        >
-          <Message />
-        </Badge>
+        {this.props.match.path !== '/:category/:post_id' && (
+          <Badge
+            badgeContent={commentCount}
+            color="primary"
+            classes={{ root: classes.comment }}
+          >
+            <Message />
+          </Badge>
+        )}
         <Menu
           anchorEl={this.state.anchorEl}
           editPostLink={editPostLink}
@@ -68,13 +71,15 @@ class CardHeaderAction extends React.Component {
 }
 
 const styles = {
-  badge: { margin: '1em' },
+  likeCount: { margin: '1em' },
+  dislikeCount: { marginRight: '1em' },
+  comment: { marginRight: '0.5em', color: 'grey' },
 };
 
 CardHeaderAction.propTypes = {
   classes: PropTypes.object.isRequired,
-  post: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  post: PropTypes.object,
+  dispatch: PropTypes.func,
 };
 
 export default withStyles(styles)(CardHeaderAction);

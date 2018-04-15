@@ -12,7 +12,7 @@ const PostCardMenu = ({
   classes,
   openMenu,
 }) => (
-  <div>
+  <React.Fragment>
     <MoreVertIcon onClick={openMenu} />
 
     <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
@@ -27,7 +27,7 @@ const PostCardMenu = ({
         </NavLink>
       </MenuItem>
     </Menu>
-  </div>
+  </React.Fragment>
 );
 
 PostCardMenu.propTypes = {

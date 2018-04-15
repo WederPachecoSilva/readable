@@ -15,10 +15,9 @@ import PropTypes from 'prop-types';
 
 import HeaderAction from './HeaderAction';
 
-const PostCard = ({ post, classes, location, dispatch }) => {
-  const postDetailLink = `/post/${post.id}`;
+const PostCard = ({ post, classes, location, dispatch, match }) => {
+  const postDetailLink = `/${post.category}/${post.id}`;
   const time = moment(post.timestamp).format('DD/MM/YYYY, h:mm:ssa');
-
   return (
     <Grid key={post.id} item md={8} sm={10} xs={12}>
       <Card>
@@ -28,9 +27,11 @@ const PostCard = ({ post, classes, location, dispatch }) => {
               {post.author.charAt(0)}
             </Avatar>
           }
-          title={post.title}
+          title={`${post.title} - ${post.author.toUpperCase()}`}
           subheader={time}
-          action={<HeaderAction dispatch={dispatch} post={post} />}
+          action={
+            <HeaderAction match={match} dispatch={dispatch} post={post} />
+          }
         />
         <CardContent>
           <Typography style={{ textAlign: 'center' }} component="p">
