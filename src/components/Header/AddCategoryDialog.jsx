@@ -53,7 +53,7 @@ AddCategoryDialog.propTypes = {
   handleChange: PropTypes.func.isRequired,
   addCategory: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  category: PropTypes.object,
+  category: PropTypes.string,
 };
 
 export default AddCategoryDialog;
