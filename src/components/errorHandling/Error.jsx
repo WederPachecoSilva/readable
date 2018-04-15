@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert } from '../primitives/Alert';
+import Alert from '../primitives/Alert';
 
 /**
  * Simple error message in case something goes wrong while rendering.
