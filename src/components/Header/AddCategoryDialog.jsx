@@ -10,6 +10,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from 'material-ui';
+import PropTypes from 'prop-types';
 
 const AddCategoryDialog = ({
   closeDialog,
@@ -46,5 +47,13 @@ const AddCategoryDialog = ({
     </Dialog>
   </React.Fragment>
 );
+
+AddCategoryDialog.propTypes = {
+  closeDialog: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  addCategory: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  category: PropTypes.object,
+};
 
 export default AddCategoryDialog;
