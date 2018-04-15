@@ -1,7 +1,7 @@
 // @ts-check
 
 import React from 'react';
-import { Menu, MenuItem, withStyles, Popover } from 'material-ui';
+import { Menu, MenuItem, withStyles } from 'material-ui';
 import { NavLink } from 'react-router-dom';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import PropTypes from 'prop-types';
@@ -34,7 +34,7 @@ const styles = {
 };
 
 CommentMenu.propTypes = {
-  anchorEl: PropTypes.object.isRequired,
+  anchorEl: PropTypes.object,
   editCommentLink: PropTypes.string.isRequired,
   deleteComment: PropTypes.func.isRequired,
   closeMenu: PropTypes.func.isRequired,
