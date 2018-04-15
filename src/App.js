@@ -46,11 +46,11 @@ const App = () => (
       <Header />
       <Switch>
         <Route exact path="/" component={Root} />
-        <Route path="/posts/:category" component={PostsByCategory} />
         <Route path="/add/post" component={AddPost} />
         <Route path="/edit/post/:post_id" component={EditPost} />
         <Route path="/edit/comment/:comment_id" component={EditComment} />
         <Route path="/:category/:post_id" component={PostDetail} />
+        <Route path="/:category" component={PostsByCategory} />
         <Route component={NotFound} />
       </Switch>
     </React.Fragment>
