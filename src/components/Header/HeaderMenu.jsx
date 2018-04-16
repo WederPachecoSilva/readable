@@ -1,5 +1,3 @@
-// @ts-check
-
 import React from 'react';
 import { IconButton, Menu, MenuItem, withStyles } from 'material-ui';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
@@ -46,8 +44,8 @@ class HeaderMenu extends React.Component {
   };
 
   openDialog = () => {
-    this.closeMenu();
     this.setState({ isDialogOpen: true });
+    this.closeMenu();
   };
 
   closeDialog = () => {

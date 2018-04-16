@@ -43,20 +43,3 @@ export interface Categories {
 export interface Comments {
   [id: string]: Comment;
 }
-
-// Actions that were rejected
-export interface Failures {
-  fetchCategoriesFailure: boolean;
-  fetchPostsByCategoryFailure: boolean;
-  fetchAllPostasFailure: boolean;
-  addPostFailure: boolean;
-  fetchPostFailure: boolean;
-  votePostFailure: boolean;
-  deletePostFailure: boolean;
-  fetchCommentsByPostFailure: boolean;
-  addCommentFailure: boolean;
-  fetchCommentFailure: boolean;
-  voteCommentFailure: boolean;
-  updateCommentFailure: boolean;
-  deleteCommentFailure: boolean;
-}

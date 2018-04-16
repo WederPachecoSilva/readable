@@ -5,17 +5,12 @@ import { Comment } from '../utils/flowTypes';
 import * as API from '../utils/readableAPI';
 import {
   FETCH_COMMENTS_BY_POST_SUCCESS,
-  FETCH_COMMENTS_BY_POST_FAILURE,
   ADD_COMMENT_SUCCESS,
-  ADD_COMMENT_FAILURE,
   FETCH_COMMENT_SUCCESS,
-  FETCH_COMMENT_FAILURE,
   VOTE_COMMENT_SUCCESS,
-  VOTE_COMMENT_FAILURE,
   UPDATE_COMMENT_SUCCESS,
-  UPDATE_COMMENT_FAILURE,
   DELETE_COMMENT_SUCCESS,
-  DELETE_COMMENT_FAILURE,
+  FAILURE,
 } from './types';
 
 export function fetchCommentsByPost(postId: string) {
@@ -28,8 +23,8 @@ export function fetchCommentsByPost(postId: string) {
       });
     } catch (error) {
       dispatch({
-        type: FETCH_COMMENTS_BY_POST_FAILURE,
-        payload: { fetchCommentsByPostFailure: true },
+        type: FAILURE,
+        payload: { failure: true },
       });
     }
   };
@@ -46,8 +41,8 @@ export function fetchComment(id: string) {
       })
       .catch(err =>
         dispatch({
-          type: FETCH_COMMENT_FAILURE,
-          payload: { fetchCommentFailure: true },
+          type: FAILURE,
+          payload: { failure: true },
         })
       );
   };
@@ -60,8 +55,8 @@ export function addComment(comment: Comment) {
       dispatch({ type: ADD_COMMENT_SUCCESS, payload: response });
     } catch (error) {
       dispatch({
-        type: ADD_COMMENT_FAILURE,
-        payload: { addCommentFailure: true },
+        type: FAILURE,
+        payload: { failure: true },
       });
     }
   };
@@ -74,8 +69,8 @@ export function voteComment(id: string, vote: 'upVote' | 'downVote') {
       dispatch({ type: VOTE_COMMENT_SUCCESS, payload: response });
     } catch (error) {
       dispatch({
-        type: VOTE_COMMENT_FAILURE,
-        payload: { voteCommentFailure: true },
+        type: FAILURE,
+        payload: { failure: true },
       });
     }
   };
@@ -91,8 +86,8 @@ export function updateComment(
       dispatch({ type: UPDATE_COMMENT_SUCCESS, payload: response });
     } catch (error) {
       dispatch({
-        type: UPDATE_COMMENT_FAILURE,
-        payload: { updateCommentfailure: true },
+        type: FAILURE,
+        payload: { failure: true },
       });
     }
   };
@@ -105,8 +100,8 @@ export function deleteComment(id: string) {
       dispatch({ type: DELETE_COMMENT_SUCCESS, payload: response });
     } catch (error) {
       dispatch({
-        type: DELETE_COMMENT_FAILURE,
-        payload: { deleteCommentFailure: true },
+        type: FAILURE,
+        payload: { failure: true },
       });
     }
   };

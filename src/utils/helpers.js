@@ -19,32 +19,29 @@ export const deleteProperty = (object, property) =>
 
 /**
  * Sort an array of dates
- * @param {'ascendet' | 'descendent'} type
- * @param {string[]} dates
- * @returns {string[]}
+ * @param {'ascendant' | 'descendant'} type
+ * @param {object[]} posts
  */
-export const sortByDate = (type, dates) => {
+export const sortByDate = (type, posts) => {
   switch (type) {
-    case type === 'ascendent':
-      return dates.sort((date1, date2) => (date1 > date2 ? 1 : -1));
+    case 'descendant':
+      return posts.sort(
+        (post1, post2) => (post1.timestamp > post2.timestamp ? 1 : -1)
+      );
 
-    case type === 'descendent':
-      return dates.sort((date1, date2) => (date1 < date2 ? -1 : 1));
+    case 'ascendant':
+      return posts.sort(
+        (post1, post2) => (post1.timestamp < post2.timestamp ? -1 : 1)
+      );
 
     default:
       return;
   }
 };
 
-export const sortByLikes = (type, votes) => {
-  switch (type) {
-    case type === 'upVote':
-      return votes.sort((vote1, vote2) => (vote1 > vote2 ? 1 : -1));
-
-    case type === 'downVote':
-      return votes.sort((vote1, vote2) => (vote1 < vote2 ? -1 : 1));
-
-    default:
-      return;
-  }
-};
+/**
+ * Sort an array by likes
+ * @param {object[]} posts
+ */
+export const sortByLikes = posts =>
+  posts.sort((post1, post2) => (post1.likeCount < post2.likeCount ? 1 : -1));

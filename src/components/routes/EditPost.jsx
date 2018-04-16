@@ -1,5 +1,3 @@
-// @ts-check
-
 import * as React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -14,8 +12,10 @@ class EditPost extends React.Component {
   state = { title: '', body: '', error: false };
 
   async componentDidMount() {
-    const { id } = this.props.match.params;
-    await this.props.dispatch(fetchPost(id));
+    const { post_id } = this.props.match.params;
+    await this.props.dispatch(fetchPost(post_id));
+    const { title, body } = this.props.posts[post_id];
+    this.setState({ title, body });
   }
 
   handleChange = e => {
@@ -31,9 +31,8 @@ class EditPost extends React.Component {
       this.setState({ error: true });
       return;
     }
-
-    dispatch(updatePost(match.params.id, { title, body }));
-    history.push('/');
+    dispatch(updatePost(match.params.post_id, { title, body }));
+    history.goBack();
     this.setState({ error: false });
   };
 
@@ -69,6 +68,10 @@ class EditPost extends React.Component {
   }
 }
 
+const mapState = ({ posts }) => {
+  return { posts };
+};
+
 const styles = {
   container: {
     display: 'flex',
@@ -99,10 +102,6 @@ const styles = {
     borderRadius: '10px',
   },
 };
-
-const mapState = state => ({
-  posts: state.posts,
-});
 
 EditPost.propTypes = {
   dispatch: PropTypes.func,

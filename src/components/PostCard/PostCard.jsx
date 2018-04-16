@@ -19,7 +19,7 @@ const PostCard = ({ post, classes, location, dispatch, match }) => {
   const postDetailLink = `/${post.category}/${post.id}`;
   const time = moment(post.timestamp).format('DD/MM/YYYY, h:mm:ssa');
   return (
-    <Grid key={post.id} item md={8} sm={10} xs={12}>
+    <Grid item md={8} sm={10} xs={12}>
       <Card>
         <CardHeader
           avatar={

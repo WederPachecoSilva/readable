@@ -1,5 +1,3 @@
-// @ts-check
-
 import React from 'react';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -24,7 +22,7 @@ const AddCategoryDialog = ({
       <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          To create a new category, please enter the name you want.
+          Please, enter the category name you want to create
         </DialogContentText>
         <TextField
           autoFocus

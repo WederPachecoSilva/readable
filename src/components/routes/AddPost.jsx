@@ -37,6 +37,7 @@ class AddPost extends React.Component {
       addPost({ id, timestamp, title, body, author, category })
     );
     this.setState({ error: false });
+    this.props.history.goBack();
   };
 
   render() {
@@ -71,7 +72,7 @@ class AddPost extends React.Component {
         >
           <option />
           {Object.keys(categories).map(id => (
-            <option key={id}>{categories[id].name.toUpperCase()}</option>
+            <option key={id}>{categories[id].name}</option>
           ))}
         </Select>
         {!category && error && <Alert>Category field must be provided</Alert>}
@@ -92,11 +93,9 @@ class AddPost extends React.Component {
   }
 }
 
-const mapState = state => {
-  return {
-    categories: state.categories,
-  };
-};
+const mapState = ({ categories }) => ({
+  categories,
+});
 
 const styles = {
   button: {

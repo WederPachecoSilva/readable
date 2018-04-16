@@ -4,11 +4,9 @@ import { Dispatch } from 'redux';
 
 import {
   FETCH_CATEGORIES_SUCCESS,
-  FETCH_CATEGORIES_FAILURE,
   ADD_CATEGORY_SUCCESS,
-  ADD_CATEGORY_FAILURE,
   DELETE_CATEGORY_SUCCESS,
-  DELETE_CATEGORY_FAILURE,
+  FAILURE,
 } from './types';
 import * as API from '../utils/readableAPI';
 import { Category } from '../utils/flowTypes';
@@ -23,9 +21,9 @@ export const fetchCategories = () => {
       });
     } catch (error) {
       dispatch({
-        type: FETCH_CATEGORIES_FAILURE,
+        type: FAILURE,
         payload: {
-          fetchCategoriesFailure: true,
+          failure: true,
         },
       });
     }
@@ -42,9 +40,9 @@ export const addCategory = (category: Category) => {
       });
     } catch (error) {
       dispatch({
-        type: ADD_CATEGORY_FAILURE,
+        type: FAILURE,
         payload: {
-          addCategoryFailure: true,
+          failure: true,
         },
       });
     }
@@ -61,9 +59,9 @@ export const deleteCategory = (id: string) => {
       });
     } catch (error) {
       dispatch({
-        type: DELETE_CATEGORY_FAILURE,
+        type: FAILURE,
         payload: {
-          deleteCategoryFailure: true,
+          failure: true,
         },
       });
     }
