@@ -9,8 +9,7 @@ import { loadState, saveState } from './localStorage';
 
 const cachedState = loadState();
 
-// ADD cachedState AFTER DEVELOPMENT
-const store = createStore(index, applyMiddleware(ReduxThunk));
+const store = createStore(index, cachedState, applyMiddleware(ReduxThunk));
 
 // Ignores UI and failure state
 store.subscribe(throttle(() => saveState(store.getState(), 1000)));
